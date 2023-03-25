@@ -1,0 +1,33 @@
+.form {
+	display: grid;
+	gap: 20px;
+}
+
+.field {
+}
+
+.field .MuiInputBase-root {
+	background-color: #d9d9d9;
+}
+
+.field .MuiInputBase-root {
+	border: 1px currentColor solid;
+}
+
+.button {
+	margin-top: 30px;
+
+	font-weight: 700;
+	text-transform: none;
+	font-size: 28px;
+	color: white;
+
+	background-color: var(--secondary-color-100);
+
+	transition: filter ease-in-out 250ms;
+}
+
+.button:hover {
+	background-color: var(--secondary-color-100);
+	filter: brightness(1.1) saturate(1.1);
+}
