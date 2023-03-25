@@ -14,6 +14,9 @@ import {
 	MTSRegularWoff
 } from '@/shared/assets';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 const theme = extendTheme({
 	shape: {
 		borderRadius: 10,

@@ -3,6 +3,6 @@ declare const styles: {
 	readonly list: string;
 	readonly item: string;
 	readonly link: string;
-	readonly label: string;
+	readonly active: string;
 };
 export = styles;
