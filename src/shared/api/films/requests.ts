@@ -34,6 +34,14 @@ const promo: Film[] = [
 		urlPreprocessedVideo: '',
 		urlPreview: filmPreview,
 		urlVideo: '',
+	},
+	{
+		id: 4,
+		title: 'Знакомство родителей',
+		description: 'Ромком о подводных камнях супружеской жизни',
+		urlPreprocessedVideo: '',
+		urlPreview: filmPreview,
+		urlVideo: '',
 	}
 ];
 
