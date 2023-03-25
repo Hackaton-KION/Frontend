@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { Paper, Typography } from '@mui/material';
 import { Link } from 'atomic-router-react';
+import * as React from 'react';
+import { LoginForm } from '@/features/auth';
 import { Logo, MainLayout } from '@/shared/ui';
 
 import styles from './page.module.css';
-import { LoginForm } from '@/features/auth';
 
 const Login: React.FC = () => {
 	return (
@@ -19,7 +19,10 @@ const Login: React.FC = () => {
 				<LoginForm />
 				<Typography className={styles.bottom} variant='h5' component='p'>
 					Нет аккаунта KION?
-					<Typography to='/registration' component={Link}>
+					<Typography
+						className={styles.link}
+						to='/registration'
+						component={Link}>
 						Зарегистрироваться
 					</Typography>
 				</Typography>

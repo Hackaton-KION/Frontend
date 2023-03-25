@@ -1,13 +1,13 @@
 import { Button } from '@mui/material';
 import cn from 'classnames';
-import * as React from 'react';
 import { useForm } from 'effector-forms';
+import * as React from 'react';
+import { useSubmit } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
+import { Field } from '@/shared/ui';
+import { form } from '../model';
 
 import styles from './login-form.module.css';
-import { form } from '../model';
-import { useSubmit } from '@/shared/lib';
-import { Field } from '@/shared/ui';
 
 export interface LoginFormProps extends CommonProps {}
 
@@ -29,7 +29,9 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
 				helperText={login.errorText()}
 				isValid={login.isValid}
 				name={login.name}
-				label='Телефон'
+				InputProps={{ disableUnderline: true, }}
+				variant='outlined'
+				placeholder='Телефон'
 				type='tel'
 			/>
 			<Field
@@ -40,7 +42,9 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
 				helperText={password.errorText()}
 				isValid={password.isValid}
 				name={password.name}
-				label='Пароль'
+				variant='outlined'
+				InputProps={{ disableUnderline: true, }}
+				placeholder='Пароль'
 				type='password'
 			/>
 			<Button className={styles.button} type='submit'>

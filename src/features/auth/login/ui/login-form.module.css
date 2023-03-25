@@ -4,14 +4,32 @@
 }
 
 .field {
+	color: #7b7b7b;
 }
 
-.field .MuiInputBase-root {
+.field input::placeholder {
+	color: currentColor;
+}
+
+.field input {
+	color: #7b7b7b;
+
 	background-color: #d9d9d9;
+
+	border-radius: inherit;
 }
 
-.field .MuiInputBase-root {
-	border: 1px currentColor solid;
+.field input:focus-visible {
+	background-color: #ffffff;
+}
+
+.field input + fieldset {
+	border-width: 2px;
+	border-color: transparent;
+}
+
+.field input:focus-visible + fieldset {
+	border-color: var(--secondary-color-100) !important;
 }
 
 .button {
@@ -24,10 +42,9 @@
 
 	background-color: var(--secondary-color-100);
 
-	transition: filter ease-in-out 250ms;
+	transition: background-color ease-in-out 250ms;
 }
 
 .button:hover {
-	background-color: var(--secondary-color-100);
-	filter: brightness(1.1) saturate(1.1);
+	background-color: var(--secondary-color-90);
 }

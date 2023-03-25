@@ -5,5 +5,6 @@ declare const styles: {
 	readonly logo: string;
 	readonly title: string;
 	readonly bottom: string;
+	readonly link: string;
 };
 export = styles;

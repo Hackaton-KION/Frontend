@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { createHistoryRouter, redirect } from 'atomic-router';
 import { RouterProvider } from 'atomic-router-react';
-import { createHistoryRouter } from 'atomic-router';
 import { createBrowserHistory } from 'history';
+import * as React from 'react';
 import { controls, routes } from '@/shared/config';
 
 const router = createHistoryRouter({
@@ -20,6 +20,11 @@ const router = createHistoryRouter({
 		}
 	],
 	controls,
+});
+
+redirect({
+	clock: router.routeNotFound,
+	route: routes.main,
 });
 
 router.setHistory(createBrowserHistory());
