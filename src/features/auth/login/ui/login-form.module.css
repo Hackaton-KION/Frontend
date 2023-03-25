@@ -27,6 +27,9 @@
 	border-width: 2px;
 	border-color: transparent;
 }
+.field input:hover + fieldset {
+	border-color: transparent !important;
+}
 
 .field input:focus-visible + fieldset {
 	border-color: var(--secondary-color-100) !important;

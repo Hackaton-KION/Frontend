@@ -1,9 +1,9 @@
-import { AppBar, Container, Toolbar } from '@mui/material';
+import { AppBar, Container, IconButton, Toolbar } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
-import { Navigation } from '@/features/page';
+import { Navigation, Search } from '@/features/page';
 import { CommonProps } from '@/shared/types';
-import { Logo } from '@/shared/ui';
+import { AvatarIcon, EyeIcon, LogoIcon } from '@/shared/ui';
 
 import styles from './header.module.css';
 
@@ -19,8 +19,15 @@ export const Header: React.FC<HeaderProps> = (props) => {
 			color='transparent'>
 			<Toolbar>
 				<Container className={styles.container}>
-					<Logo className={styles.logo} />
+					<LogoIcon className={styles.logo} />
 					<Navigation className={styles.navigation} />
+					<IconButton className={styles.accessability}>
+						<EyeIcon />
+					</IconButton>
+					<Search className={styles.search} />
+					<IconButton className={styles.account}>
+						<AvatarIcon />
+					</IconButton>
 				</Container>
 			</Toolbar>
 		</AppBar>

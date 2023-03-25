@@ -18,10 +18,13 @@
 }
 
 .accessability {
+	color: #ffffff;
 }
 
 .search {
+	max-width: 220px;
 }
 
 .account {
+	color: #ffffff;
 }
