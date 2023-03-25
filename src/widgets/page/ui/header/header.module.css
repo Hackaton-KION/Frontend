@@ -1,0 +1,27 @@
+.wrapper {
+	box-shadow: none;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+}
+
+.logo {
+	width: 138px;
+	height: auto;
+}
+
+.navigation {
+	flex-grow: 2;
+}
+
+.accessability {
+}
+
+.search {
+}
+
+.account {
+}
