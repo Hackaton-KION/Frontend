@@ -1,6 +1,7 @@
 import { createMutation } from '@farfetched/core';
 import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
+import { authUserModel } from '@/entities/auth-user';
 import { LoginParams } from '@/shared/api';
 
 const login = createDomain();
@@ -31,4 +32,9 @@ sample({
 sample({
 	clock: mutation.finished.failure,
 	target: form.fields.password.resetValue,
+});
+
+sample({
+	clock: mutation.finished.success,
+	target: authUserModel.$user,
 });
