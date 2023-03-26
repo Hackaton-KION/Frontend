@@ -2,7 +2,7 @@ import { createRoute, createRouterControls } from 'atomic-router';
 
 export const routes = {
 	login: createRoute(),
-	main: createRoute(),
+	home: createRoute(),
 	film: createRoute<{ id: number }>(),
 };
 

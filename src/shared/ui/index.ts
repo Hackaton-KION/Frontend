@@ -1,3 +1,3 @@
 export * from './main-layout';
-export * from './logo';
+export * from './icons';
 export * from './field';

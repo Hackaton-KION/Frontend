@@ -12,7 +12,7 @@ const router = createHistoryRouter({
 		},
 		{
 			path: '/',
-			route: routes.main,
+			route: routes.home,
 		},
 		{
 			path: '/film/:id',
@@ -24,7 +24,7 @@ const router = createHistoryRouter({
 
 redirect({
 	clock: router.routeNotFound,
-	route: routes.main,
+	route: routes.home,
 });
 
 router.setHistory(createBrowserHistory());

@@ -2,7 +2,7 @@ import { SvgIcon } from '@mui/material';
 import * as React from 'react';
 import { CommonProps } from '@/shared/types';
 
-export const Logo: React.FC<CommonProps> = (props) => {
+export const LogoIcon: React.FC<CommonProps> = (props) => {
 	const { className, } = props;
 
 	return (

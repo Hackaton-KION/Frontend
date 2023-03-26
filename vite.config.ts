@@ -19,6 +19,7 @@ export default defineConfig({
 	css: {
 		devSourcemap: true,
 	},
+	assetsInclude: ['*.woff2', '*.png', '*.jpg'],
 	plugins: [
 		react(),
 		babel({
