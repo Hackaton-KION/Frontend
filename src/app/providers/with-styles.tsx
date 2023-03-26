@@ -17,8 +17,6 @@ import {
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import 'shaka-player/dist/controls.css';
-
 const theme = extendTheme({
 	shape: {
 		borderRadius: 10,

@@ -64,12 +64,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 		return () => {
 			clearTimeout(id);
 		};
-	}, []);
+	}, [currentTime]);
 
 	React.useEffect(() => {
 		const url = 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd';
 		const player = MediaPlayer().create();
-		player.initialize(videoRef.current, url, false);
+		player.initialize(videoRef.current!, url, false);
 	}, []);
 
 	//Функция перемотки вперед

@@ -6,9 +6,9 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { IconButton, Slider } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { VideoAccessability } from '@/features/film';
 import { useToggle } from '../../lib';
 import { CommonProps, VoidFunction } from '../../types';
-import { EyeIcon } from '../icons';
 
 import styles from './video-controls.module.css';
 
@@ -53,9 +53,7 @@ export const VideoControls: React.FC<VideoControlsProps> = (props) => {
 				)}
 			</div>
 			<div className={styles.groups}>
-				<IconButton className={styles.button}>
-					<EyeIcon className={styles.icon} />
-				</IconButton>
+				<VideoAccessability />
 				<IconButton className={styles.button}>
 					<SettingsIcon className={styles.icon} />
 				</IconButton>
