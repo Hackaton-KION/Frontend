@@ -8,15 +8,16 @@ import cn from 'classnames';
 import * as React from 'react';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
-import { EyeIcon } from '../../../icons';
 
 import { VideoPlayerHandlersContext } from '../../model';
 import styles from './controls.module.css';
 
-export interface ControlsProps extends CommonProps {}
+export interface ControlsProps extends CommonProps {
+	readonly extraControls?: React.ReactElement | null;
+}
 
 export const Controls: React.FC<ControlsProps> = (props) => {
-	const { className, } = props;
+	const { className, extraControls, } = props;
 	const { onBack, onForward, onChangeVolume, } = React.useContext(
 		VideoPlayerHandlersContext
 	);
@@ -53,9 +54,7 @@ export const Controls: React.FC<ControlsProps> = (props) => {
 				)}
 			</div>
 			<div className={styles.groups}>
-				<IconButton className={styles.button}>
-					<EyeIcon className={styles.icon} />
-				</IconButton>
+				{extraControls}
 				<IconButton className={styles.button}>
 					<SettingsIcon className={styles.icon} />
 				</IconButton>
