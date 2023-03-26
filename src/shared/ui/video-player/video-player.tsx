@@ -9,6 +9,8 @@ import { useToggle } from '@/shared/lib';
 import { convertSeconds } from './lib';
 import { VideoControls } from '../video-controls';
 
+import { MediaPlayer } from 'dashjs';
+
 export interface VideoPlayerProps extends CommonProps {}
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
@@ -64,6 +66,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 		};
 	}, []);
 
+	React.useEffect(() => {
+		const url = 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd';
+		const player = MediaPlayer().create();
+		player.initialize(videoRef.current, url, false);
+	}, []);
+
 	//Функция перемотки вперед
 	function forward() {
 		if (videoRef.current) {
@@ -94,11 +102,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 			</div>
 			<div className={styles.videoConteiner}>
 				<video
+					data-dashjs-player
 					className={styles.video}
-					ref={videoRef}
-					src='/video.mp4'
-					// src='http://10.147.19.65:5000/videostream'
-					id='video1'></video>
+					ref={videoRef}></video>
 				{playing ? (
 					<img
 						className={cn(styles.button, styles.controlButton__play)}

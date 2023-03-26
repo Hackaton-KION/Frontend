@@ -1,4 +1,5 @@
 declare const styles: {
+	readonly button: string;
 	readonly modal: string;
 	readonly 'modal-content': string;
 	readonly 'modal-header': string;

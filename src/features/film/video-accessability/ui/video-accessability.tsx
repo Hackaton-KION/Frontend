@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable max-classes-per-file */
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
 	Accordion,
@@ -7,17 +5,19 @@ import {
 	AccordionDetails,
 	Typography,
 	FormControlLabel,
-	Switch
+	Switch,
+	IconButton,
+	Popover
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import cn from 'classnames';
+// import cn from 'classnames';
 import * as React from 'react';
 import { PhotoshopPicker } from 'react-color';
 
-import { createRoot } from 'react-dom/client';
-import shaka from 'shaka-player/dist/shaka-player.ui';
-import { CommonProps, ShakaFC } from '@/shared/types';
-// import styles from './video-accessability.module.css';
+import { useToggle } from '@/shared/lib';
+import { CommonProps } from '@/shared/types';
+import { EyeIcon } from '@/shared/ui';
+import styles from './video-accessability.module.css';
 
 const Android12Switch = styled(Switch)(({ theme, }) => ({
 	padding: 8,
@@ -54,136 +54,223 @@ const Android12Switch = styled(Switch)(({ theme, }) => ({
 
 export interface VideoAccessabilityProps extends CommonProps {}
 
-export const VideoAccessability: ShakaFC<VideoAccessabilityProps> = (props) => {
+export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
+	props
+) => {
 	const { className, } = props;
+	console.log(className);
 
 	const [color, setColor] = React.useState('');
+	const [open, openControls] = useToggle();
+	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
 	return (
-		<div className={cn('modal', className)}>
-			<div className='modal-content'>
-				<div className='modal-header'>
-					{/* <select name='' id=''>
-						<option value=''>Я в Дубае</option>
-						<option value=''>Я в Дубае</option>
-						<option value=''>Я в Дубае</option>
-					</select> */}
-					<div className='header-text'>
-						<h3>Настройки для пользователей с особыми поребностями</h3>
+		<>
+			<IconButton
+				className={styles.button}
+				onClick={openControls.toggle}
+				ref={setAnchorEl}>
+				<EyeIcon />
+			</IconButton>
+			<Popover open={open} anchorEl={anchorEl} onClose={openControls.toggleOff}>
+				<div className='options-color'>
+					<div className='color-switches'>
+						<div className='switch'>
+							<h3 className='switch-text'>
+								Отключить яркие вспышки света в сценах
+							</h3>
+							<FormControlLabel
+								label=''
+								control={<Android12Switch defaultChecked />}
+							/>
+						</div>
+						<div className='switch'>
+							<h3 className='switch-text'>Блокировка спектра цветов</h3>
+							<FormControlLabel
+								label=''
+								control={<Android12Switch defaultChecked />}
+							/>
+						</div>
+					</div>
+					<div className='color-options'>
+						<Accordion>
+							<AccordionSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls='panel1a-content'
+								id='panel1a-header'>
+								<Typography>Красный</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<PhotoshopPicker
+									color={color}
+									onChange={(e) => {
+										setColor(e.hex);
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls='panel1a-content'
+								id='panel1a-header'>
+								<Typography>Синий</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<PhotoshopPicker
+									color={color}
+									onChange={(e) => {
+										setColor(e.hex);
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+						<Accordion>
+							<AccordionSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls='panel1a-content'
+								id='panel1a-header'>
+								<Typography>Зеленый</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<PhotoshopPicker
+									color={color}
+									onChange={(e) => {
+										setColor(e.hex);
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
 					</div>
 				</div>
-				<div className='modal-conteiner'>
-					<div className='options-color'>
-						<div className='color-switches'>
-							<div className='switch'>
-								<h3 className='switch-text'>
-									Отключить яркие вспышки света в сценах
-								</h3>
-								<FormControlLabel
-									label=''
-									control={<Android12Switch defaultChecked />}
-								/>
-							</div>
-							<div className='switch'>
-								<h3 className='switch-text'>Блокировка спектра цветов</h3>
-								<FormControlLabel
-									label=''
-									control={<Android12Switch defaultChecked />}
-								/>
-							</div>
-						</div>
-						<div className='color-options'>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls='panel1a-content'
-									id='panel1a-header'>
-									<Typography>Красный</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<PhotoshopPicker
-										color={color}
-										onChange={(e) => {
-											setColor(e.hex);
-										}}
-									/>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls='panel1a-content'
-									id='panel1a-header'>
-									<Typography>Синий</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<PhotoshopPicker
-										color={color}
-										onChange={(e) => {
-											setColor(e.hex);
-										}}
-									/>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									aria-controls='panel1a-content'
-									id='panel1a-header'>
-									<Typography>Зеленый</Typography>
-								</AccordionSummary>
-								<AccordionDetails>
-									<PhotoshopPicker
-										color={color}
-										onChange={(e) => {
-											setColor(e.hex);
-										}}
-									/>
-								</AccordionDetails>
-							</Accordion>
-						</div>
+				<div className='sliders'>
+					<div className='slider'>
+						<h3>Яркость</h3>
+						<input type='range' min={0} max={100} />
 					</div>
-					<div className='sliders'>
-						<div className='slider'>
-							<h3>Яркость</h3>
-							<input type='range' min={0} max={100} />
-						</div>
-						<div className='slider'>
-							<h3>Контрастность</h3>
-							<input type='range' min={0} max={100} />
-						</div>
-						<div className='slider'>
-							<h3>Насыщенность</h3>
-							<input type='range' min={0} max={100} />
-						</div>
-						<div className='slider'>
-							ShakaUIElementName
-							<h3>Резкость</h3>
-							<input type='range' min={0} max={100} />
-						</div>
+					<div className='slider'>
+						<h3>Контрастность</h3>
+						<input type='range' min={0} max={100} />
+					</div>
+					<div className='slider'>
+						<h3>Насыщенность</h3>
+						<input type='range' min={0} max={100} />
+					</div>
+					<div className='slider'>
+						ShakaUIElementName
+						<h3>Резкость</h3>
+						<input type='range' min={0} max={100} />
 					</div>
 				</div>
-			</div>
-		</div>
+			</Popover>
+		</>
 	);
+
+	// return (
+	// 	<div className={cn('modal', className)}>
+	// 		<div className='modal-content'>
+	// 			<div className='modal-header'>
+	// 				{/* <select name='' id=''>
+	// 					<option value=''>Я в Дубае</option>
+	// 					<option value=''>Я в Дубае</option>
+	// 					<option value=''>Я в Дубае</option>
+	// 				</select> */}
+	// 				<div className='header-text'>
+	// 					<h3>Настройки для пользователей с особыми поребностями</h3>
+	// 				</div>
+	// 			</div>
+	// 			<div className='modal-conteiner'>
+	// 				<div className='options-color'>
+	// 					<div className='color-switches'>
+	// 						<div className='switch'>
+	// 							<h3 className='switch-text'>
+	// 								Отключить яркие вспышки света в сценах
+	// 							</h3>
+	// 							<FormControlLabel
+	// 								label=''
+	// 								control={<Android12Switch defaultChecked />}
+	// 							/>
+	// 						</div>
+	// 						<div className='switch'>
+	// 							<h3 className='switch-text'>Блокировка спектра цветов</h3>
+	// 							<FormControlLabel
+	// 								label=''
+	// 								control={<Android12Switch defaultChecked />}
+	// 							/>
+	// 						</div>
+	// 					</div>
+	// 					<div className='color-options'>
+	// 						<Accordion>
+	// 							<AccordionSummary
+	// 								expandIcon={<ExpandMoreIcon />}
+	// 								aria-controls='panel1a-content'
+	// 								id='panel1a-header'>
+	// 								<Typography>Красный</Typography>
+	// 							</AccordionSummary>
+	// 							<AccordionDetails>
+	// 								<PhotoshopPicker
+	// 									color={color}
+	// 									onChange={(e) => {
+	// 										setColor(e.hex);
+	// 									}}
+	// 								/>
+	// 							</AccordionDetails>
+	// 						</Accordion>
+	// 						<Accordion>
+	// 							<AccordionSummary
+	// 								expandIcon={<ExpandMoreIcon />}
+	// 								aria-controls='panel1a-content'
+	// 								id='panel1a-header'>
+	// 								<Typography>Синий</Typography>
+	// 							</AccordionSummary>
+	// 							<AccordionDetails>
+	// 								<PhotoshopPicker
+	// 									color={color}
+	// 									onChange={(e) => {
+	// 										setColor(e.hex);
+	// 									}}
+	// 								/>
+	// 							</AccordionDetails>
+	// 						</Accordion>
+	// 						<Accordion>
+	// 							<AccordionSummary
+	// 								expandIcon={<ExpandMoreIcon />}
+	// 								aria-controls='panel1a-content'
+	// 								id='panel1a-header'>
+	// 								<Typography>Зеленый</Typography>
+	// 							</AccordionSummary>
+	// 							<AccordionDetails>
+	// 								<PhotoshopPicker
+	// 									color={color}
+	// 									onChange={(e) => {
+	// 										setColor(e.hex);
+	// 									}}
+	// 								/>
+	// 							</AccordionDetails>
+	// 						</Accordion>
+	// 					</div>
+	// 				</div>
+	// 				<div className='sliders'>
+	// 					<div className='slider'>
+	// 						<h3>Яркость</h3>
+	// 						<input type='range' min={0} max={100} />
+	// 					</div>
+	// 					<div className='slider'>
+	// 						<h3>Контрастность</h3>
+	// 						<input type='range' min={0} max={100} />
+	// 					</div>
+	// 					<div className='slider'>
+	// 						<h3>Насыщенность</h3>
+	// 						<input type='range' min={0} max={100} />
+	// 					</div>
+	// 					<div className='slider'>
+	// 						ShakaUIElementName
+	// 						<h3>Резкость</h3>
+	// 						<input type='range' min={0} max={100} />
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// );
 };
-
-VideoAccessability.ShakaUIElement = class extends shaka.ui.Element {
-	constructor(parent: any, controls: any) {
-		super(parent, controls);
-		createRoot(parent).render(<VideoAccessability />);
-	}
-};
-
-VideoAccessability.ShakaFactory = class {
-	create(rootElement: HTMLElement, controls: any) {
-		return new VideoAccessability.ShakaUIElement(rootElement, controls);
-	}
-};
-
-VideoAccessability.ShakaUIElementName = 'accessability';
-
-shaka.ui.Controls.registerElement(
-	(VideoAccessability as any).ShakaUIElementName,
-	new (VideoAccessability as any).ShakaFactory()
-);
