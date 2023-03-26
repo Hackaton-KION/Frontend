@@ -1,0 +1,50 @@
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+}
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding-bottom: 2rem;
+}
+
+.modal-header{
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    border-bottom: 1px solid #7E7E7E;
+}
+
+.modal-conteiner{
+    padding: 0rem 4rem 0rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.color-switches{
+    display: flex;
+    flex-direction: column;
+}
+
+.switch{
+    display: flex;
+    justify-content: space-between;
+}
+
+.switch-text{
+    max-width: 60%;
+}
+
+.color-options{
+    padding-right: 1.5rem;
+}
+
+.slider{
+    display: flex;
+    justify-content: space-between;
+}

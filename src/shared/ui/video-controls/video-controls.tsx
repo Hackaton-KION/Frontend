@@ -1,14 +1,14 @@
 import Forward10Icon from '@mui/icons-material/Forward10';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import SettingsIcon from '@mui/icons-material/Settings';
-import Replay10Icon from '@mui/icons-material/Replay10';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import { IconButton, Button, Slider } from '@mui/material';
+import Replay10Icon from '@mui/icons-material/Replay10';
+import SettingsIcon from '@mui/icons-material/Settings';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { IconButton, Slider } from '@mui/material';
 import cn from 'classnames';
 import * as React from 'react';
+import { useToggle } from '../../lib';
 import { CommonProps, VoidFunction } from '../../types';
 import { EyeIcon } from '../icons';
-import { useToggle } from '../../lib';
 
 import styles from './video-controls.module.css';
 
@@ -19,8 +19,8 @@ export interface VideoControlsProps extends CommonProps {
 }
 
 export const VideoControls: React.FC<VideoControlsProps> = (props) => {
-	const { onBack, onForward, onChangeVolume, className } = props;
-	const [showSlider, { toggle }] = useToggle();
+	const { onBack, onForward, onChangeVolume, className, } = props;
+	const [showSlider, { toggle, }] = useToggle();
 
 	const handlerChangeVolume = (_: unknown, volume: number | number[]) => {
 		onChangeVolume(volume as number);
