@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { MainLayout, VideoPlayer } from '@/shared/ui';
 
-const Film: React.FC = () => {
-	/*
-  Докинуть нормальные данные, чтобы правильно рендерить группы
-  */
+import styles from './page.module.css'
 
+
+const Film: React.FC = () => {
 	return (
-		<MainLayout>
+		<MainLayout className={styles.layout}>
 			<VideoPlayer />
 		</MainLayout>
 	);

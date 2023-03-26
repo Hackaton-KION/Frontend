@@ -1,9 +1,9 @@
 declare const styles: {
-  readonly "wrapper": string;
+  readonly "controls": string;
   readonly "button": string;
+  readonly "groups": string;
   readonly "icon": string;
-  readonly "button__prev": string;
-  readonly "button__next": string;
+  readonly "slider": string;
 };
 export = styles;
 

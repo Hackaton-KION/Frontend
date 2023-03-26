@@ -1,5 +1,5 @@
 declare const styles: {
-	readonly promo: string;
-	readonly groups: string;
+  readonly "layout": string;
 };
 export = styles;
+
