@@ -5,6 +5,7 @@ import { routes } from '@/shared/config';
 
 const LoginPage = React.lazy(() => import('./login'));
 const HomePage = React.lazy(() => import('./home'));
+const FilmPage = React.lazy(() => import('./film'));
 
 const View = createRoutesView({
 	routes: [
@@ -15,6 +16,11 @@ const View = createRoutesView({
 		{
 			route: routes.home,
 			view: HomePage,
+		},
+
+		{
+			route: routes.film,
+			view: FilmPage,
 		}
 	],
 });
