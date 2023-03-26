@@ -6,7 +6,11 @@ import styles from './page.module.css';
 const Film: React.FC = () => {
 	return (
 		<MainLayout className={styles.layout}>
-			<VideoPlayer />
+			<VideoPlayer
+				className={styles.player}
+				// url='https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd'
+				url='http://10.147.19.65:5000/segments/manifest.mpd'
+			/>
 		</MainLayout>
 	);
 };
