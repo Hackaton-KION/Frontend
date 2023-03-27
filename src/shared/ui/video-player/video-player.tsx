@@ -9,10 +9,11 @@ import styles from './video-player.module.css';
 export interface VideoPlayerProps extends CommonProps {
 	readonly url: string;
 	readonly extraControls?: React.ReactElement | null;
+	readonly filter: string;
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
-	const { url, className, extraControls, } = props;
+	const { url, className, extraControls, filter, } = props;
 	const videoRef = React.useRef<HTMLVideoElement | null>(null);
 
 	return (
@@ -21,7 +22,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 			url={url}
 			videoRef={videoRef}>
 			<Header />
-			<Video ref={videoRef} />
+			<Video ref={videoRef} filter={filter} />
 			<div className={styles.bottom}>
 				<Timeline />
 				<Controls extraControls={extraControls} />

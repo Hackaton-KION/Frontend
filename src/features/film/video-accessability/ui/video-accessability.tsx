@@ -8,11 +8,9 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
-	SelectChangeEvent,
 	Button
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-// import cn from 'classnames';
 import cn from 'classnames';
 import * as React from 'react';
 import { SketchPicker } from 'react-color';
@@ -63,9 +61,15 @@ const Android12Switch = styled(Switch)(({ theme, }) => ({
 	},
 }));
 
-export interface VideoAccessabilityProps extends CommonProps {}
+export interface VideoAccessabilityProps extends CommonProps {
+	readonly setFilter: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export const VideoAccessability: React.FC<VideoAccessabilityProps> = () => {
+export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
+	props
+) => {
+	const { setFilter, } = props;
+
 	const [redColor, setRedColor] = React.useState('rgb(255, 0, 0)');
 	const [blueColor, setBlueColor] = React.useState('rgb(0, 255, 0)');
 	const [greenColor, setGreenColor] = React.useState('rgb(0, 0, 255)');
@@ -83,10 +87,28 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = () => {
 		null
 	);
 
-	const [age, setAge] = React.useState('');
+	const [brightness, setBrightness] = React.useState<number>(100);
+	const [contrast, setContrast] = React.useState<number>(100);
+	const [saturate, setSaturate] = React.useState<number>(5);
 
-	const handleChange = (event: SelectChangeEvent) => {
-		setAge(event.target.value as string);
+	const changeBrightness = (event: any) => {
+		setBrightness(event.target.value);
+		sendFilter();
+	};
+
+	const changeContrast = (event: any) => {
+		setContrast(event.target.value);
+		sendFilter();
+	};
+
+	const changeSaturate = (event: any) => {
+		setSaturate(event.target.value);
+		sendFilter();
+	};
+
+	const sendFilter = () => {
+		const filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate})`;
+		setFilter(filter);
 	};
 
 	return (
@@ -110,9 +132,9 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = () => {
 								className={cn(styles.field, styles.fieldset)}
 								labelId='demo-simple-select-label'
 								id='demo-simple-select'
-								value={age}
+								// value={age}
 								label='Пресеты'
-								onChange={handleChange}
+								// onChange={handleChange}
 								color='secondary'
 								style={{ color: 'white', fontSize: '18px', }}>
 								<MenuItem
@@ -141,15 +163,39 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = () => {
 							<div className={styles.sliders}>
 								<div className={styles.slider}>
 									<h3 style={{ color: 'white', }}>Яркость</h3>
-									<Slider color='secondary' style={{ width: '8rem', }} />
+									<Slider
+										color='secondary'
+										min={0}
+										max={200}
+										defaultValue={brightness}
+										step={1}
+										onChange={changeBrightness}
+										style={{ width: '8rem', }}
+									/>
 								</div>
 								<div className={styles.slider}>
 									<h3 style={{ color: 'white', }}>Контрастность</h3>
-									<Slider color='secondary' style={{ width: '8rem', }} />
+									<Slider
+										color='secondary'
+										min={50}
+										max={300}
+										defaultValue={contrast}
+										step={1}
+										onChange={changeContrast}
+										style={{ width: '8rem', }}
+									/>
 								</div>
 								<div className={styles.slider}>
 									<h3 style={{ color: 'white', }}>Насыщенность</h3>
-									<Slider color='secondary' style={{ width: '8rem', }} />
+									<Slider
+										color='secondary'
+										style={{ width: '8rem', }}
+										min={0}
+										max={10}
+										defaultValue={saturate}
+										step={1}
+										onChange={changeSaturate}
+									/>
 								</div>
 								<div className={styles.slider}>
 									<h3 style={{ color: 'white', }}>Резкость</h3>
@@ -246,112 +292,4 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = () => {
 			</Popover>
 		</>
 	);
-
-	// return (
-	// 	<div className={cn('modal', className)}>
-	// 		<div className='modal-content'>
-	// 			<div className='modal-header'>
-	// 				{/* <select name='' id=''>
-	// 					<option value=''>Я в Дубае</option>
-	// 					<option value=''>Я в Дубае</option>
-	// 					<option value=''>Я в Дубае</option>
-	// 				</select> */}
-	// 				<div className='header-text'>
-	// 					<h3>Настройки для пользователей с особыми поребностями</h3>
-	// 				</div>
-	// 			</div>
-	// 			<div className='modal-conteiner'>
-	// 				<div className='options-color'>
-	// 					<div className='color-switches'>
-	// 						<div className='switch'>
-	// 							<h3 className='switch-text'>
-	// 								Отключить яркие вспышки света в сценах
-	// 							</h3>
-	// 							<FormControlLabel
-	// 								label=''
-	// 								control={<Android12Switch defaultChecked />}
-	// 							/>
-	// 						</div>
-	// 						<div className='switch'>
-	// 							<h3 className='switch-text'>Блокировка спектра цветов</h3>
-	// 							<FormControlLabel
-	// 								label=''
-	// 								control={<Android12Switch defaultChecked />}
-	// 							/>
-	// 						</div>
-	// 					</div>
-	// 					<div className='color-options'>
-	// 						<Accordion>
-	// 							<AccordionSummary
-	// 								expandIcon={<ExpandMoreIcon />}
-	// 								aria-controls='panel1a-content'
-	// 								id='panel1a-header'>
-	// 								<Typography>Красный</Typography>
-	// 							</AccordionSummary>
-	// 							<AccordionDetails>
-	// 								<PhotoshopPicker
-	// 									color={color}
-	// 									onChange={(e) => {
-	// 										setColor(e.hex);
-	// 									}}
-	// 								/>
-	// 							</AccordionDetails>
-	// 						</Accordion>
-	// 						<Accordion>
-	// 							<AccordionSummary
-	// 								expandIcon={<ExpandMoreIcon />}
-	// 								aria-controls='panel1a-content'
-	// 								id='panel1a-header'>
-	// 								<Typography>Синий</Typography>
-	// 							</AccordionSummary>
-	// 							<AccordionDetails>
-	// 								<PhotoshopPicker
-	// 									color={color}
-	// 									onChange={(e) => {
-	// 										setColor(e.hex);
-	// 									}}
-	// 								/>
-	// 							</AccordionDetails>
-	// 						</Accordion>
-	// 						<Accordion>
-	// 							<AccordionSummary
-	// 								expandIcon={<ExpandMoreIcon />}
-	// 								aria-controls='panel1a-content'
-	// 								id='panel1a-header'>
-	// 								<Typography>Зеленый</Typography>
-	// 							</AccordionSummary>
-	// 							<AccordionDetails>
-	// 								<PhotoshopPicker
-	// 									color={color}
-	// 									onChange={(e) => {
-	// 										setColor(e.hex);
-	// 									}}
-	// 								/>
-	// 							</AccordionDetails>
-	// 						</Accordion>
-	// 					</div>
-	// 				</div>
-	// 				<div className='sliders'>
-	// 					<div className='slider'>
-	// 						<h3>Яркость</h3>
-	// 						<input type='range' min={0} max={100} />
-	// 					</div>
-	// 					<div className='slider'>
-	// 						<h3>Контрастность</h3>
-	// 						<input type='range' min={0} max={100} />
-	// 					</div>
-	// 					<div className='slider'>
-	// 						<h3>Насыщенность</h3>
-	// 						<input type='range' min={0} max={100} />
-	// 					</div>
-	// 					<div className='slider'>
-	// 						ShakaUIElementName
-	// 						<h3>Резкость</h3>
-	// 						<input type='range' min={0} max={100} />
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// );
 };
