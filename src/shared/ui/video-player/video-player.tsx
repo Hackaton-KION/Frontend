@@ -23,7 +23,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 			url={url}
 			videoRef={videoRef}>
 			<Header title={title} />
-			<Video ref={videoRef} videoStyles={videoStyles} />
+			<Video ref={videoRef} videoStyles={videoStyles} title={'title'} id={1} />
 			<div className={styles.bottom}>
 				<Timeline />
 				<Controls extraControls={extraControls} />
