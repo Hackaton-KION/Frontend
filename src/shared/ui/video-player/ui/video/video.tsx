@@ -7,19 +7,20 @@ import { CommonProps } from '@/shared/types';
 import styles from './video.module.css';
 
 export interface VideoProps extends CommonProps {
-	filter: string;
+	readonly videoStyles?: React.CSSProperties | null;
 }
 
 export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
 	(props, ref) => {
-		const { className, filter, } = props;
+		const { className, videoStyles, } = props;
 
-		React.useEffect(() => {
-			console.log(`Filter ${filter}`);
-		}, [filter]);
 		return (
 			<div className={cn(styles.container, className)}>
-				<video className={styles.video} ref={ref} style={{ filter, }} />
+				<video
+					className={styles.video}
+					ref={ref}
+					style={videoStyles ?? undefined}
+				/>
 			</div>
 		);
 	}

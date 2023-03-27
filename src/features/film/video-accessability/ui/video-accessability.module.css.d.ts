@@ -1,17 +1,15 @@
 declare const styles: {
+	readonly wrapper: string;
 	readonly button: string;
-	readonly modal: string;
-	readonly 'modal-content': string;
-	readonly 'modal-header': string;
-	readonly 'modal-conteiner': string;
+	readonly form: string;
+	readonly header: string;
+	readonly middle: string;
 	readonly 'options-color': string;
-	readonly 'color-switches': string;
-	readonly switch: string;
-	readonly 'switch-text': string;
+	readonly switches: string;
 	readonly sliders: string;
-	readonly slider: string;
 	readonly palette: string;
 	readonly field: string;
-	readonly fieldset: string;
+	readonly popover: string;
+	readonly picker: string;
 };
 export = styles;
