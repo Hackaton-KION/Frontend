@@ -5,15 +5,17 @@ import { CommonProps } from '@/shared/types';
 
 import styles from './header.module.css';
 
-export interface HeaderProps extends CommonProps {}
+export interface HeaderProps extends CommonProps {
+	readonly title: string;
+}
 
 export const Header: React.FC<HeaderProps> = (props) => {
-	const { className, } = props;
+	const { className, title } = props;
 
 	return (
 		<div className={cn(styles.container, className)}>
 			<Typography className={styles.title} variant='h3' component='p'>
-				Сердце пармы
+				{title}
 			</Typography>
 		</div>
 	);

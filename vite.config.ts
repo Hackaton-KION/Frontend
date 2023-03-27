@@ -10,6 +10,13 @@ export default defineConfig({
 		port: 3000,
 		cors: true,
 		hmr: true,
+		proxy: {
+			'/static': {
+				target: 'http://10.147.19.65:5000/static/',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/static/, ''),
+			},
+		},
 	},
 	resolve: {
 		alias: {
@@ -29,6 +36,6 @@ export default defineConfig({
 			browserslistConfigFile: true,
 			extensions: ['.ts', '.tsx'],
 		}),
-		splitVendorChunkPlugin()
+		splitVendorChunkPlugin(),
 	],
 });

@@ -1,1 +1,1 @@
-export * as pageLoginModel from './login';
+export * as pageLoginModel from './auth';
