@@ -10,6 +10,9 @@ export interface VideoAccessabilityParams {
 	readonly sharpness: number;
 	readonly offBrightFlash: boolean;
 	readonly blockingColorSpecter: boolean;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
 }
 
 export const form = createForm<VideoAccessabilityParams>({
@@ -31,6 +34,15 @@ export const form = createForm<VideoAccessabilityParams>({
 		},
 		sharpness: {
 			init: 100,
+		},
+		red: {
+			init: 255,
+		},
+		green: {
+			init: 255,
+		},
+		blue: {
+			init: 255,
 		},
 	},
 	domain: videoAccessability,

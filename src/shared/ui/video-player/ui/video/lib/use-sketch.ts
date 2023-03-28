@@ -1,19 +1,24 @@
-import { Element, Renderer } from 'p5';
+import { Element, Renderer, Color } from 'p5';
 import * as React from 'react';
 import { P5CanvasInstance } from 'react-p5-wrapper';
 
 export interface UseSketchParams {
 	readonly ref: React.ForwardedRef<HTMLVideoElement>;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
 }
 
 export const useSketch = (params: UseSketchParams) => {
-	const { ref, } = params;
+	const { ref, red, green, blue, } = params;
 
 	const canvasRef = React.useRef<null | Renderer>(null);
 	const videoRef = React.useRef<null | Element>(null);
+	const colorRef = React.useRef(null as unknown as Color);
 
 	const sketch = React.useCallback((p5: P5CanvasInstance) => {
 		p5.setup = () => {
+			colorRef.current = p5.color(red, green, blue);
 			if (canvasRef.current) {
 				return;
 			}
@@ -54,7 +59,7 @@ export const useSketch = (params: UseSketchParams) => {
 			if (!videoRef.current || !videoRef.current.elt.src) {
 				return;
 			}
-			p5.tint(255, 255, 255);
+			p5.tint(colorRef.current);
 			p5.image(videoRef.current, 0, 0);
 		};
 
@@ -63,6 +68,12 @@ export const useSketch = (params: UseSketchParams) => {
 			videoRef.current!.size(window.innerWidth, window.innerHeight);
 		};
 	}, []);
+
+	React.useEffect(() => {
+		colorRef.current.setRed(red);
+		colorRef.current.setGreen(green);
+		colorRef.current.setBlue(blue);
+	}, [red, green, blue]);
 
 	return {
 		sketch,

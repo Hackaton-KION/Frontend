@@ -10,7 +10,7 @@ export interface FilmPlayerProps extends CommonProps, Film {}
 export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
 	const { className, title, manifestURL, } = props;
 
-	const { brightness, contrast, saturation, } = useUnit(
+	const { brightness, contrast, saturation, red, green, blue, } = useUnit(
 		videoAccessabilityModel.form.$values
 	);
 
@@ -24,6 +24,9 @@ export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
 			url={manifestURL}
 			title={title}
 			videoStyles={videoStyles}
+			red={red}
+			green={green}
+			blue={blue}
 			extraControls={<VideoAccessability />}
 		/>
 	);
