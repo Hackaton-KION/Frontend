@@ -1,20 +1,20 @@
 import { AppBar, Button, Container, IconButton, Toolbar } from '@mui/material';
+import { Link } from 'atomic-router-react';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import * as React from 'react';
 import { Navigation, Search } from '@/features/page';
+import { authUserModel } from '@/entities/auth-user';
+import { routes } from '@/shared/config';
 import { CommonProps } from '@/shared/types';
 import { AvatarIcon, EyeIcon, LogoIcon } from '@/shared/ui';
 
 import styles from './header.module.css';
-import { useUnit } from 'effector-react';
-import { authUserModel } from '@/entities/auth-user';
-import { Link } from 'atomic-router-react';
-import { routes } from '@/shared/config';
 
 export interface HeaderProps extends CommonProps {}
 
 export const Header: React.FC<HeaderProps> = (props) => {
-	const { className } = props;
+	const { className, } = props;
 	const isAuth = useUnit(authUserModel.$isAuth);
 
 	return (

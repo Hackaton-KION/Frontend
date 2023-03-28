@@ -10,7 +10,7 @@ export interface HeaderProps extends CommonProps {
 }
 
 export const Header: React.FC<HeaderProps> = (props) => {
-	const { className, title } = props;
+	const { className, title, } = props;
 
 	return (
 		<div className={cn(styles.container, className)}>

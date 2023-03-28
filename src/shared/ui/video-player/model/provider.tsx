@@ -12,7 +12,7 @@ export interface VideoPlayerProviderProps extends React.PropsWithChildren {
 export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 	props
 ) => {
-	const { url, videoRef, children } = props;
+	const { url, videoRef, children, } = props;
 	const [isPlaying, isPlayingControls] = useToggle(); // Состояние воспроизведения
 	const [progress, setProgress] = React.useState(0);
 	const [volume, setVolume] = React.useState(1);
@@ -87,10 +87,9 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 	}, []);
 
 	React.useEffect(() => {
-		console.log('player');
 		const player = MediaPlayer().create();
-    console.log(document.getElementById('1_title')!)
-		player.initialize(document.getElementById('1_title')!, url, false);
+
+		player.initialize(videoRef.current!, url, false);
 	}, [url]);
 
 	// eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -101,7 +100,7 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		volume,
 	};
 	const handlers = React.useMemo(
-		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume }),
+		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume, }),
 		[]
 	);
 	return (

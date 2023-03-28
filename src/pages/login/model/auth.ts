@@ -1,5 +1,5 @@
-import { debug } from 'patronum';
 import { redirect } from 'atomic-router';
+import { debug } from 'patronum';
 import { loginModel } from '@/features/auth';
 import { routes } from '@/shared/config';
 

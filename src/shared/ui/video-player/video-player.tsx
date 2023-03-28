@@ -14,7 +14,7 @@ export interface VideoPlayerProps extends CommonProps {
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
-	const { url, className, extraControls, videoStyles, title } = props;
+	const { url, className, extraControls, videoStyles, title, } = props;
 	const videoRef = React.useRef<HTMLVideoElement | null>(null);
 
 	return (
@@ -23,7 +23,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 			url={url}
 			videoRef={videoRef}>
 			<Header title={title} />
-			<Video ref={videoRef} videoStyles={videoStyles} title={'title'} id={1} />
+			<Video ref={videoRef} videoStyles={videoStyles} title='title' id={1} />
 			<div className={styles.bottom}>
 				<Timeline />
 				<Controls extraControls={extraControls} />
