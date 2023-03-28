@@ -1,6 +1,7 @@
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { VideoAccessability, videoAccessabilityModel } from '@/features/film';
+import { videoAccessabilityModel } from '@/features/film';
+import { VideoPresets } from '@/features/film/video-presets/ui';
 import { Film } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { VideoPlayer } from '@/shared/ui';
@@ -27,7 +28,7 @@ export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
 			red={red}
 			green={green}
 			blue={blue}
-			extraControls={<VideoAccessability />}
+			extraControls={<VideoPresets />}
 		/>
 	);
 };
