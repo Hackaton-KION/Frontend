@@ -28,13 +28,13 @@ export const createFormModel = (domain?: Domain) => {
 			enableCustomGamma: {
 				init: false,
 			},
-			redChanel: {
+			red: {
 				init: 255,
 			},
-			greenChanel: {
+			green: {
 				init: 255,
 			},
-			blueChanel: {
+			blue: {
 				init: 255,
 			},
 		},

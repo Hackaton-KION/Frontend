@@ -3,20 +3,15 @@ import { createDomain, sample } from 'effector';
 import { presetsApi } from '@/shared/api';
 import { createFormModel } from '../shared/lib';
 
-const createPreset = createDomain();
+const updatePreset = createDomain();
 
-const handlerFx = createPreset.effect(presetsApi.create);
+const handlerFx = updatePreset.effect(presetsApi.update);
 
 export const mutation = createMutation({
 	effect: handlerFx,
 });
 
-export const form = createFormModel(createPreset);
-
-sample({
-	clock: form.formValidated,
-	target: mutation.start,
-});
+export const form = createFormModel(updatePreset);
 
 sample({
 	clock: mutation.finished.success,

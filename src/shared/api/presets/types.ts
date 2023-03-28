@@ -8,9 +8,9 @@ export interface Preset {
 	readonly sharpness: number;
 	readonly offEpilepticScene: boolean;
 	readonly enableCustomGamma: boolean;
-	readonly redChanel: number;
-	readonly greenChanel: number;
-	readonly blueChanel: number;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
 }
 
 export interface CreatePresetParams extends Omit<Preset, 'id' | 'userId'> {}

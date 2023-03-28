@@ -10,7 +10,7 @@ export interface UseSketchParams {
 }
 
 export const useSketch = (params: UseSketchParams) => {
-	const { ref, red, green, blue, } = params;
+	const { ref, red, green, blue } = params;
 
 	const canvasRef = React.useRef<null | Renderer>(null);
 	const videoRef = React.useRef<null | Element>(null);
@@ -31,7 +31,7 @@ export const useSketch = (params: UseSketchParams) => {
 			}
 
 			videoRef.current = p5.createCapture('video');
-			const { width, height, } = canvasRef.current.size();
+			const { width, height } = canvasRef.current.size();
 			videoRef.current.size(width, height);
 
 			switch (typeof ref) {
@@ -50,8 +50,11 @@ export const useSketch = (params: UseSketchParams) => {
 			}
 
 			(videoRef.current.elt as HTMLVideoElement).playsInline = false;
+			(videoRef.current.elt as HTMLVideoElement).autoplay = false;
+			(videoRef.current.elt as HTMLVideoElement).pause();
 
 			videoRef.current.hide();
+			videoRef.current.elt.src = '/video.mp4';
 			videoRef.current.removeAttribute('playsinline');
 		};
 
