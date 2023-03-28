@@ -1,96 +1,75 @@
+.wrapper {
+	display: grid;
+	gap: 1em;
+
+	padding: 2rem;
+
+	background-color: rgba(0, 0, 0, 0.904);
+}
+
 .button {
 	color: white;
 }
 
-.modal {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: max-content;
-	height: max-content;
+.form {
+	display: grid;
+	gap: 1em;
 }
 
-.modal-content {
-	display: flex;
-	flex-direction: column;
-	background-color: rgba(0, 0, 0, 0.904);
-	padding: 2rem;
-}
+.header {
+	padding-bottom: 1em;
 
-.modal-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 8rem;
 	border-bottom: 1px solid #ffffff;
 }
 
-.modal-conteiner {
-	padding: 0rem 4rem 0rem 2rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	color: 'black'
+.middle {
+	align-items: stretch;
+	gap: 1em;
 }
 
-.options-color{
+.options-color {
 	display: flex;
 	gap: 4rem;
 	align-items: center;
 }
 
-.color-switches {
+.switches {
 	display: flex;
 	flex-direction: column;
 }
 
-.switch {
+.sliders {
 	display: flex;
 	justify-content: space-between;
-	gap: 2rem;
-	width: 20rem;
 }
 
-.switch-text {
-	max-width: 60%;
-}
-
-.sliders{
-	display: grid;
-	height: max-content;
-	width: max-content;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 2rem;
-}
-
-.slider {
-	display: flex;
-	justify-content: space-between;
-	gap: 2rem;
-	align-items: center;
-}
-
-.palette{
+.palette {
 	display: flex;
 	justify-content: space-evenly;
 
-	color: 'black'
+	color: 'black';
 }
 
-.field fieldset{
-	border: 1px solid #ffffff !important; 
-}
-
-.field svg{
+.field {
 	color: white;
 }
 
+.field fieldset {
+	border: 1px solid #ffffff !important;
+}
+
+.field input {
+	color: white;
+}
+
+.field svg {
+	color: white;
+}
 
 .popover {
-	color: 'black'
+	color: 'black';
 }
 
 .picker {
-	background-color: rgba(0, 0, 0, 0.904)
+	background-color: rgba(0, 0, 0, 0.904);
 }

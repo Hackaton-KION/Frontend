@@ -1,12 +1,14 @@
 import { instance } from '../request';
-import { LoginParams } from './types';
+import { AuthResponse, LoginParams } from './types';
 
-const baseURL = 'auth';
+const baseURL = 'users';
 
 export const auth = () => {
 	return instance.get(`${baseURL}/auth`).json();
 };
 
-export const login = (params: LoginParams) => {
-	return instance.post(`${baseURL}/login`, { json: params, }).json();
+export const login = (params: LoginParams): Promise<AuthResponse> => {
+	return instance
+		.post(`${baseURL}/authorization/login`, { json: params, })
+		.json();
 };

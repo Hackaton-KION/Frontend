@@ -7,13 +7,26 @@ import { PlayingButton } from './ui/playing-button';
 import styles from './video-player.module.css';
 
 export interface VideoPlayerProps extends CommonProps {
+	readonly title: string;
 	readonly url: string;
 	readonly extraControls?: React.ReactElement | null;
-	readonly filter: string;
+	readonly videoStyles?: React.CSSProperties | null;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
-	const { url, className, extraControls, filter, } = props;
+	const {
+		url,
+		className,
+		extraControls,
+		videoStyles,
+		title,
+		red,
+		green,
+		blue,
+	} = props;
 	const videoRef = React.useRef<HTMLVideoElement | null>(null);
 
 	return (
@@ -21,8 +34,16 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 			className={cn(styles.container, className)}
 			url={url}
 			videoRef={videoRef}>
-			<Header />
-			<Video ref={videoRef} filter={filter} />
+			<Header title={title} />
+			<Video
+				ref={videoRef}
+				videoStyles={videoStyles}
+				red={red}
+				green={green}
+				blue={blue}
+				title='title'
+				id={1}
+			/>
 			<div className={styles.bottom}>
 				<Timeline />
 				<Controls extraControls={extraControls} />

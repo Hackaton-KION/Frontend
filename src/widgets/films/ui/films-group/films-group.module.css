@@ -1,10 +1,10 @@
 .wrapper {
-  display: grid;
-  gap: 25px;
+	display: grid;
+	gap: 25px;
 }
 
 .title {
-  font-weight: 500;
+	font-weight: 500;
 }
 
 .list {

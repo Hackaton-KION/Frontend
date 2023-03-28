@@ -3,6 +3,11 @@ export interface LoginParams {
 	readonly password: string;
 }
 
-export interface AuthResponse {
+export interface AuthUser {
 	readonly id: number;
+	readonly login: string;
+}
+
+export interface AuthResponse extends AuthUser {
+	readonly accessToken: string;
 }

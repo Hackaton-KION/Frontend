@@ -88,6 +88,7 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 
 	React.useEffect(() => {
 		const player = MediaPlayer().create();
+
 		player.initialize(videoRef.current!, url, false);
 	}, [url]);
 

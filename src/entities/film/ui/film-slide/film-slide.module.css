@@ -29,10 +29,10 @@
 
 	display: grid;
 	align-items: end;
-  gap: 15px;
+	gap: 15px;
 
 	padding: 35px 215px;
-  padding-right: 190px;;
+	padding-right: 190px;
 }
 
 .title {
@@ -43,9 +43,9 @@
 }
 
 .info {
-  display: flex;
+	display: flex;
 }
 
 .age {
-  margin-left: auto;
+	margin-left: auto;
 }
