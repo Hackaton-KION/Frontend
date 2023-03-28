@@ -14,33 +14,30 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 ) => {
 	const { url, videoRef, children, } = props;
 	const [isPlaying, isPlayingControls] = useToggle(); // Состояние воспроизведения
-	const [progress, setProgress] = React.useState(0);
 	const [volume, setVolume] = React.useState(1);
+	const [time, setTime] = React.useState(0);
 
 	const updateTime = React.useCallback(() => {
 		if (!videoRef.current) {
 			return;
 		}
-		setProgress(
-			(videoRef.current.currentTime / videoRef.current.duration) * 100
-		);
+		setTime((videoRef.current.currentTime / videoRef.current.duration) * 100);
 	}, []);
 
 	const onPlay = React.useCallback(() => {
 		if (!videoRef.current) {
 			return;
 		}
-
-		videoRef.current.play();
 		isPlayingControls.toggleOn();
+		videoRef.current.play();
 	}, []);
 	const onStop = React.useCallback(() => {
 		if (!videoRef.current) {
 			return;
 		}
 
-		videoRef.current.pause();
 		isPlayingControls.toggleOff();
+		videoRef.current.pause();
 	}, []);
 	const onForward = React.useCallback(() => {
 		if (!videoRef.current) {
@@ -67,6 +64,30 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		setVolume(videoRef.current.volume);
 	}, []);
 
+	const onChangeTime = React.useCallback((time: number) => {
+		if (!videoRef.current) {
+			return;
+		}
+
+		videoRef.current.currentTime = time / 1000;
+		updateTime();
+		setTime(time);
+	}, []);
+
+	const handleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'ArrowRight') {
+			onForward();
+		} else if (e.key === 'ArrowLeft') {
+			onBack();
+		} else if (e.key === ' ') {
+			if (videoRef.current?.paused) {
+				onStop();
+			} else {
+				onPlay();
+			}
+		}
+	};
+
 	React.useEffect(() => {
 		const id = setInterval(() => {
 			if (!videoRef.current) {
@@ -92,15 +113,22 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		player.initialize(videoRef.current!, url, false);
 	}, [url]);
 
+	React.useEffect(() => {
+		document.addEventListener('keydown', handleKeyDown);
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, []);
+
 	// eslint-disable-next-line react/jsx-no-constructed-context-values
 	const state = {
 		isPlaying,
 		videoRef,
-		progress,
+		time,
 		volume,
 	};
 	const handlers = React.useMemo(
-		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume, }),
+		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume, onChangeTime, }),
 		[]
 	);
 	return (

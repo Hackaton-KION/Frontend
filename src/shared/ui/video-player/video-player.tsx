@@ -28,6 +28,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 		blue,
 	} = props;
 	const videoRef = React.useRef<HTMLVideoElement | null>(null);
+	// const [key, setKey] = React.useState('')
+
+	// const onKeyDown = (e: any) => {
+	// 	setKey(e.key)
+	// };
+
+	// React.useEffect(()=>{
+	// 	document.addEventListener('keyup', onKeyDown)
+	// 	return () => {
+	// 		document.removeEventListener("keydown", onKeyDown);
+	// 	};
+	// }, [key])
 
 	return (
 		<Root

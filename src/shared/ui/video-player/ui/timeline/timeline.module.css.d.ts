@@ -6,5 +6,7 @@ declare const styles: {
 	readonly time: string;
 	readonly progressTime: string;
 	readonly allTime: string;
+	readonly connect: string;
+	readonly 'inner-seek': string;
 };
 export = styles;

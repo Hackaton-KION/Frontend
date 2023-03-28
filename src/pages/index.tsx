@@ -3,6 +3,8 @@ import { createRoutesView } from 'atomic-router-react';
 import * as React from 'react';
 import { routes } from '@/shared/config';
 
+import styles from './index.module.css';
+
 const LoginPage = React.lazy(() => import('./login'));
 const HomePage = React.lazy(() => import('./home'));
 const FilmPage = React.lazy(() => import('./film'));
@@ -27,7 +29,14 @@ const View = createRoutesView({
 
 export const Pages: React.FC = () => {
 	return (
-		<React.Suspense fallback={<CircularProgress />}>
+		<React.Suspense
+			fallback={
+				<CircularProgress
+					size={80}
+					color='secondary'
+					className={styles.circle}
+				/>
+			}>
 			<View />
 		</React.Suspense>
 	);

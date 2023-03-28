@@ -18,6 +18,7 @@ export const PlayingButton: React.FC<CommonProps> = (props) => {
 	const { onPlay, onStop, } = React.useContext(VideoPlayerHandlersContext);
 
 	const onClick = isPlaying ? onStop : onPlay;
+
 	return (
 		<IconButton className={cn(styles.button, className)} onClick={onClick}>
 			{isPlaying ? (

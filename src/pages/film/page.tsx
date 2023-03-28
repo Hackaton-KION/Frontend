@@ -19,7 +19,7 @@ const Film: React.FC = () => {
 				// {...film.data}
 			/>
 			{/* ) : (
-				<CircularProgress />
+				<CircularProgress size={80} color='secondary'/>
 			)} */}
 		</MainLayout>
 	);
