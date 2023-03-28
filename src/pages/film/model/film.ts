@@ -15,6 +15,6 @@ cache(query);
 
 sample({
 	clock: [currentRoute.opened, loadedWithRouteState],
-	fn: ({ params }) => params,
+	fn: ({ params, }) => params,
 	target: query.start,
 });

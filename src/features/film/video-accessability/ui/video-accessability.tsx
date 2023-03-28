@@ -3,28 +3,18 @@ import {
 	IconButton,
 	Popover,
 	MenuItem,
-	Button,
 	Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import cn from 'classnames';
 import { useForm } from 'effector-forms';
 import * as React from 'react';
-import { SketchPicker } from 'react-color';
 
 import { useSubmit, useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { Checkbox, EyeIcon, Field, Slider } from '@/shared/ui';
 import { form } from '../model';
 import styles from './video-accessability.module.css';
-
-const pickerStyles = {
-	default: {
-		picker: {
-			backgroundColor: 'rgba(0, 0, 0, 0.904)',
-		},
-	},
-};
 
 const Android12Switch = styled(Switch)(({ theme, }) => ({
 	padding: 8,
@@ -73,26 +63,14 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 		sharpness,
 		offBrightFlash,
 		saturation,
+		red,
+		green,
+		blue,
 	} = fields;
 	const onSubmit = useSubmit(submit);
 
-	const [redColor, setRedColor] = React.useState('rgb(255, 0, 0)');
-	const [blueColor, setBlueColor] = React.useState('rgb(0, 255, 0)');
-	const [greenColor, setGreenColor] = React.useState('rgb(0, 0, 255)');
-
 	const [open, openControls] = useToggle();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-	const [openRedPalette, paletteRedControls] = useToggle();
-	const [openBluePalette, paletteBlueControls] = useToggle();
-	const [openGreenPalette, paletteGreenControls] = useToggle();
-
-	const [redPalette, setRedPalette] = React.useState<HTMLElement | null>(null);
-	const [bluePalette, setBluePalette] = React.useState<HTMLElement | null>(
-		null
-	);
-	const [greenPalette, setGreenPalette] = React.useState<HTMLElement | null>(
-		null
-	);
 
 	return (
 		<>
@@ -200,66 +178,39 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 							</div>
 						</div>
 						<div className={styles.palette}>
-							<Button
-								variant='contained'
+							<Slider
+								label='Красный'
+								name={red.name}
+								value={red.value}
+								onChange={red.onChange}
+								min={0}
+								max={255}
+								step={1}
 								color='secondary'
-								ref={setRedPalette}
-								onClick={paletteRedControls.toggle}
-								disabled={!blockingColorSpecter.value}>
-								Красный
-							</Button>
-							<Button
-								variant='contained'
+								style={{ width: '8rem', }}
+							/>
+							<Slider
+								label='Зеленый'
+								name={green.name}
+								value={green.value}
+								onChange={green.onChange}
+								min={0}
+								max={255}
+								step={1}
 								color='secondary'
-								ref={setBluePalette}
-								onClick={paletteBlueControls.toggle}
-								disabled={!blockingColorSpecter.value}>
-								Зеленый
-							</Button>
-							<Button
-								variant='contained'
+								style={{ width: '8rem', }}
+							/>
+							<Slider
+								label='Синий'
+								name={blue.name}
+								value={blue.value}
+								onChange={blue.onChange}
+								min={0}
+								max={255}
+								step={1}
 								color='secondary'
-								ref={setGreenPalette}
-								onClick={paletteGreenControls.toggle}
-								disabled={!blockingColorSpecter.value}>
-								Синий
-							</Button>
-							<Popover
-								open={openRedPalette}
-								anchorEl={redPalette}
-								onClose={paletteRedControls.toggleOff}>
-								<SketchPicker
-									color={redColor}
-									styles={pickerStyles}
-									onChange={(color) => {
-										setRedColor(color.hex);
-									}}
-								/>
-							</Popover>
-							<Popover
-								open={openBluePalette}
-								anchorEl={bluePalette}
-								onClose={paletteBlueControls.toggleOff}>
-								<SketchPicker
-									styles={pickerStyles}
-									color={blueColor}
-									onChange={(color) => {
-										setBlueColor(color.hex);
-									}}
-								/>
-							</Popover>
-							<Popover
-								open={openGreenPalette}
-								anchorEl={greenPalette}
-								onClose={paletteGreenControls.toggleOff}>
-								<SketchPicker
-									styles={pickerStyles}
-									color={greenColor}
-									onChange={(color) => {
-										setGreenColor(color.hex);
-									}}
-								/>
-							</Popover>
+								style={{ width: '8rem', }}
+							/>
 						</div>
 					</form>
 				</div>

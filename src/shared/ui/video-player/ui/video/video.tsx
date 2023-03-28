@@ -1,26 +1,36 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-
 import cn from 'classnames';
 import * as React from 'react';
+import { ReactP5Wrapper } from 'react-p5-wrapper';
 import { CommonProps } from '@/shared/types';
+import { useSketch, useStyledCanvas } from './lib';
 
 import styles from './video.module.css';
 
 export interface VideoProps extends CommonProps {
 	readonly videoStyles?: React.CSSProperties | null;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
 }
 
 export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
 	(props, ref) => {
-		const { className, videoStyles, } = props;
+		const { className, videoStyles, red, green, blue, } = props;
+		const { sketch, canvasRef, } = useSketch({
+			ref,
+			red,
+			green,
+			blue,
+		});
+		useStyledCanvas({
+			className: styles.video,
+			styles: videoStyles,
+			canvasRef,
+		});
 
 		return (
 			<div className={cn(styles.container, className)}>
-				<video
-					className={styles.video}
-					ref={ref}
-					style={videoStyles ?? undefined}
-				/>
+				<ReactP5Wrapper sketch={sketch} />
 			</div>
 		);
 	}

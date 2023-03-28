@@ -9,6 +9,6 @@ export const auth = () => {
 
 export const login = (params: LoginParams): Promise<AuthResponse> => {
 	return instance
-		.post(`${baseURL}/authorization/login`, { json: params })
+		.post(`${baseURL}/authorization/login`, { json: params, })
 		.json();
 };
