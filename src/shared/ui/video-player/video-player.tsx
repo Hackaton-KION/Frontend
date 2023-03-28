@@ -41,8 +41,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 				red={red}
 				green={green}
 				blue={blue}
-				title='title'
-				id={1}
 			/>
 			<div className={styles.bottom}>
 				<Timeline />
