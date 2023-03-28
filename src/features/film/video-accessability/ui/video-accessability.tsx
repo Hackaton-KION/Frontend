@@ -171,7 +171,7 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 									name={blockingColorSpecter.name}
 									checked={blockingColorSpecter.value}
 									onChange={blockingColorSpecter.onChange}
-									label='Блокировка спектра цветов'
+									label='Пользовательская настройка гаммы'
 									color='secondary'
 									control={Android12Switch}
 								/>
@@ -187,6 +187,7 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 								max={255}
 								step={1}
 								color='secondary'
+								disabled={!blockingColorSpecter.value}
 								style={{ width: '8rem', }}
 							/>
 							<Slider
@@ -198,6 +199,7 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 								max={255}
 								step={1}
 								color='secondary'
+								disabled={!blockingColorSpecter.value}
 								style={{ width: '8rem', }}
 							/>
 							<Slider
@@ -209,6 +211,7 @@ export const VideoAccessability: React.FC<VideoAccessabilityProps> = (
 								max={255}
 								step={1}
 								color='secondary'
+								disabled={!blockingColorSpecter.value}
 								style={{ width: '8rem', }}
 							/>
 						</div>
