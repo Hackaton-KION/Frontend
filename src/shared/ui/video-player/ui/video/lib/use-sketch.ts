@@ -55,6 +55,7 @@ export const useSketch = (params: UseSketchParams) => {
 
 			videoRef.current.hide();
 			videoRef.current.elt.src = '/video.mp4';
+			videoRef.current.elt.volume = 0.1;
 			videoRef.current.removeAttribute('playsinline');
 		};
 

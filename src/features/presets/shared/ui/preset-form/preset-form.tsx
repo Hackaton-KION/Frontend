@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { CommonProps } from '@/shared/types';
 import { Form, useForm } from 'effector-forms';
 import { PresetFormParams } from '../../lib';
-import { Button, MenuItem, Switch } from '@mui/material';
+import { Button, Switch } from '@mui/material';
 
 import styles from './preset-form.module.css';
 import { useSubmit } from '@/shared/lib';
@@ -95,6 +95,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						max={10}
 						step={1}
 						color='secondary'
+						disabled
 						style={{ width: '8rem' }}
 					/>
 				</div>

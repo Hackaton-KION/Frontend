@@ -1,10 +1,19 @@
-.form {
+.wrapper {
 	display: grid;
 	gap: 1em;
 
 	padding: 2rem;
 
 	background-color: rgba(0, 0, 0, 0.904);
+}
+
+.button {
+	color: white;
+}
+
+.form {
+	display: grid;
+	gap: 1em;
 }
 
 .header {
@@ -34,6 +43,13 @@
 	justify-content: space-between;
 }
 
+.palette {
+	display: flex;
+	justify-content: space-evenly;
+
+	color: 'black';
+}
+
 .field {
 	color: white;
 }
@@ -50,8 +66,10 @@
 	color: white;
 }
 
-.palette {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.popover {
+	color: 'black';
+}
+
+.picker {
+	background-color: rgba(0, 0, 0, 0.904);
 }
