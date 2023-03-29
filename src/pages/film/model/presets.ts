@@ -84,7 +84,6 @@ update(userPresetsModel.query, {
 					refetch: true,
 				};
 			}
-      debugger
 			return {
 				result: query.result.filter(
 					(preset) => preset.id !== mutation.params.id

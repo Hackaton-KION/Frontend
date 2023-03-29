@@ -12,7 +12,7 @@ export interface UpdatePresetProps extends CommonProps {
 }
 
 export const UpdatePreset: React.FC<UpdatePresetProps> = (props) => {
-	const { className, open, onClose, anchorEl } = props;
+	const { className, open, onClose, anchorEl, } = props;
 
 	return (
 		<Popover open={open} anchorEl={anchorEl} onClose={onClose}>

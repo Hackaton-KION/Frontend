@@ -10,25 +10,25 @@ import { EyeIcon } from '@/shared/ui';
 import {
 	changingPresetModel,
 	fileExtraControls,
-	selectedPresetModel,
+	selectedPresetModel
 } from '../../model';
 import styles from './film-extra-controls.module.css';
 
 export interface FilmExtraControlsProps extends CommonProps {}
 
 export const FilmExtraControls: React.FC<FilmExtraControlsProps> = (props) => {
-	const { className } = props;
+	const { className, } = props;
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [stage, setStage] = useUnit([
 		fileExtraControls.$stage,
-		fileExtraControls.setStage,
+		fileExtraControls.setStage
 	]);
 	const [presetsOpen, presetsControls] = useToggle();
 	const [changingId, onChangingSelect, selectedId, onSelect] = useUnit([
 		changingPresetModel.$id,
 		changingPresetModel.selected,
 		selectedPresetModel.$id,
-		selectedPresetModel.selected,
+		selectedPresetModel.selected
 	]);
 
 	const onCreate = () => {

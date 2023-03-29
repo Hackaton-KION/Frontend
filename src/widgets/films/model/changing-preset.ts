@@ -1,10 +1,10 @@
 import { querySync } from 'atomic-router';
 import { createDomain, sample } from 'effector';
+import { and, or, not } from 'patronum';
+import { createPresetModel, updatePresetModel } from '@/features/presets';
 import { userPresetsModel } from '@/entities/presets';
 import { Preset } from '@/shared/api';
 import { controls } from '@/shared/config';
-import { createPresetModel, updatePresetModel } from '@/features/presets';
-import { and, or, not, debug } from 'patronum';
 import { setStage, $isUpdate, $isCreate } from './film-extra-controls';
 import { $selectedPreset } from './selected-preset';
 
@@ -69,7 +69,7 @@ sample({
 sample({
 	clock: [updatePresetModel.form.$values, createPresetModel.form.$values],
 	filter: $changingStarted,
-	fn: (values) => ({ ...values, id: -1, userId: null, isStandard: false }),
+	fn: (values) => ({ ...values, id: -1, userId: null, isStandard: false, }),
 	target: $selectedPreset,
 });
 
@@ -101,7 +101,7 @@ sample({
 sample({
 	clock: updatePresetModel.form.formValidated,
 	source: $id,
-	fn: (id, values) => ({ ...values, id: Number(id) }),
+	fn: (id, values) => ({ ...values, id: Number(id), }),
 	target: updatePresetModel.mutation.start,
 });
 

@@ -1,4 +1,4 @@
-import { combine, createDomain, sample } from 'effector';
+import { createDomain, sample } from 'effector';
 import { userPresetsModel } from '@/entities/presets';
 import { Preset } from '@/shared/api';
 
@@ -40,7 +40,7 @@ sample({
 		presets: userPresetsModel.query.$data,
 		id: $id,
 	},
-	fn: ({ presets, id }) => {
+	fn: ({ presets, id, }) => {
 		return (
 			presets.find((preset) => preset.id === id) ??
 			presets.at(0) ??

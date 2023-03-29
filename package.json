@@ -33,7 +33,6 @@
     "p5": "^1.6.0",
     "patronum": "^1.16.0",
     "react": "^18.2.0",
-    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-p5-wrapper": "^4.1.1",
     "swiper": "^9.1.1"
@@ -50,7 +49,6 @@
     "@types/node": "^18.15.7",
     "@types/p5": "^1.6.0",
     "@types/react": "^18.0.29",
-    "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
