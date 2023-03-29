@@ -11,16 +11,19 @@ export interface VideoProps extends CommonProps {
 	readonly red: number;
 	readonly green: number;
 	readonly blue: number;
+	readonly enableCustomGamma: boolean;
 }
 
 export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
 	(props, ref) => {
-		const { className, videoStyles, red, green, blue, } = props;
+		const { className, videoStyles, red, green, blue, enableCustomGamma, } =
+			props;
 		const { sketch, canvasRef, } = useSketch({
 			ref,
 			red,
 			green,
 			blue,
+			enableCustomGamma,
 		});
 		useStyledCanvas({
 			className: styles.video,

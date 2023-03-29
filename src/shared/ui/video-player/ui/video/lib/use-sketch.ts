@@ -7,10 +7,11 @@ export interface UseSketchParams {
 	readonly red: number;
 	readonly green: number;
 	readonly blue: number;
+	readonly enableCustomGamma: boolean;
 }
 
 export const useSketch = (params: UseSketchParams) => {
-	const { ref, red, green, blue, } = params;
+	const { ref, red, green, blue, enableCustomGamma, } = params;
 
 	const canvasRef = React.useRef<null | Renderer>(null);
 	const videoRef = React.useRef<null | Element>(null);
@@ -50,8 +51,12 @@ export const useSketch = (params: UseSketchParams) => {
 			}
 
 			(videoRef.current.elt as HTMLVideoElement).playsInline = false;
+			(videoRef.current.elt as HTMLVideoElement).autoplay = false;
+			(videoRef.current.elt as HTMLVideoElement).pause();
 
 			videoRef.current.hide();
+			// videoRef.current.elt.src = '/video.mp4';
+			videoRef.current.elt.volume = 0.1;
 			videoRef.current.removeAttribute('playsinline');
 		};
 
@@ -70,10 +75,17 @@ export const useSketch = (params: UseSketchParams) => {
 	}, []);
 
 	React.useEffect(() => {
-		colorRef.current.setRed(red);
-		colorRef.current.setGreen(green);
-		colorRef.current.setBlue(blue);
-	}, [red, green, blue]);
+		if (enableCustomGamma) {
+			colorRef.current.setRed(red);
+			colorRef.current.setGreen(green);
+			colorRef.current.setBlue(blue);
+			return;
+		}
+
+		colorRef.current.setRed(255);
+		colorRef.current.setGreen(255);
+		colorRef.current.setBlue(255);
+	}, [red, green, blue, enableCustomGamma]);
 
 	return {
 		sketch,

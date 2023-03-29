@@ -17,7 +17,9 @@ import {
 	ListSubheader
 } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
 import React, { useState } from 'react';
+import { userPresetsModel } from '@/entities/presets';
 import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { EyeIcon } from '@/shared/ui';
@@ -34,6 +36,7 @@ const array = [
 
 export const VideoPresets: React.FC<VideoPresetsProps> = (props) => {
 	const { className, } = props;
+	const presets = useUnit(userPresetsModel.query);
 	const [open, openControls] = useToggle();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [arrayPresets, setArrayPresets] = useState(array);
@@ -78,16 +81,18 @@ export const VideoPresets: React.FC<VideoPresetsProps> = (props) => {
 							flexDirection: 'column',
 							justifyContent: 'center',
 						}}>
-						{arrayPresets.map((element) => {
+						{presets.data.map((preset) => {
 							return !edit ? (
-								<ListItemButton selected>
-									<ListItemAvatar>
-										<Avatar style={{ backgroundColor: '#db8cff', }}>
-											<MovieFilterIcon color='secondary' />
-										</Avatar>
-									</ListItemAvatar>
-									<ListItemText primary={element.name} />
-								</ListItemButton>
+								<ListItem disablePadding>
+									<ListItemButton selected>
+										<ListItemAvatar>
+											<Avatar style={{ backgroundColor: '#db8cff', }}>
+												<MovieFilterIcon color='secondary' />
+											</Avatar>
+										</ListItemAvatar>
+										<ListItemText primary={preset.name} />
+									</ListItemButton>
+								</ListItem>
 							) : (
 								<ListItem>
 									<ListItemAvatar>
@@ -98,7 +103,7 @@ export const VideoPresets: React.FC<VideoPresetsProps> = (props) => {
 									<ListItemText
 										primary={
 											<Typography variant='body1' component='p'>
-												{element.name}
+												{preset.name}
 											</Typography>
 										}
 									/>
@@ -108,7 +113,7 @@ export const VideoPresets: React.FC<VideoPresetsProps> = (props) => {
 									<IconButton
 										className={cn(styles.button, className)}
 										onClick={() => {
-											deletePreset(element.id);
+											deletePreset(preset.id);
 										}}>
 										<RemoveCircleIcon color='secondary' />
 									</IconButton>

@@ -12,9 +12,8 @@ export default defineConfig({
 		hmr: true,
 		proxy: {
 			'/static': {
-				target: 'http://10.147.19.65:5000/static/',
+				target: 'http://localhost:5000',
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/static/, ''),
 			},
 		},
 	},

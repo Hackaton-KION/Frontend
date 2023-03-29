@@ -1,7 +1,6 @@
 import { createMutation } from '@farfetched/core';
 import { createDomain, sample } from 'effector';
 import { createForm } from 'effector-forms';
-import { debug } from 'patronum';
 import { authUserModel } from '@/entities/auth-user';
 import { authApi, LoginParams } from '@/shared/api';
 
@@ -34,8 +33,6 @@ sample({
 	clock: mutation.finished.failure,
 	target: form.fields.password.resetValue,
 });
-
-debug(mutation.finished.failure, form.formValidated);
 
 sample({
 	clock: mutation.finished.success,

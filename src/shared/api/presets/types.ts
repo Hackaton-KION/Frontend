@@ -1,6 +1,6 @@
 export interface Preset {
 	readonly id: number;
-	readonly userId: number;
+	readonly userId: number | null;
 	readonly name: string;
 	readonly brightness: number;
 	readonly contrast: number;
@@ -8,9 +8,10 @@ export interface Preset {
 	readonly sharpness: number;
 	readonly offEpilepticScene: boolean;
 	readonly enableCustomGamma: boolean;
-	readonly redChanel: number;
-	readonly greenChanel: number;
-	readonly blueChanel: number;
+	readonly red: number;
+	readonly green: number;
+	readonly blue: number;
+	readonly isStandard: boolean;
 }
 
 export interface CreatePresetParams extends Omit<Preset, 'id' | 'userId'> {}

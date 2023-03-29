@@ -14,6 +14,7 @@ export interface VideoPlayerProps extends CommonProps {
 	readonly red: number;
 	readonly green: number;
 	readonly blue: number;
+	readonly enableCustomGamma: boolean;
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
@@ -26,6 +27,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 		red,
 		green,
 		blue,
+		enableCustomGamma,
 	} = props;
 	const videoRef = React.useRef<HTMLVideoElement | null>(null);
 	// const [key, setKey] = React.useState('')
@@ -53,6 +55,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = (props) => {
 				red={red}
 				green={green}
 				blue={blue}
+				enableCustomGamma={enableCustomGamma}
 			/>
 			<div className={styles.bottom}>
 				<Timeline />

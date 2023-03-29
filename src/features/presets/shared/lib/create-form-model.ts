@@ -2,7 +2,8 @@ import { Domain } from 'effector';
 import { createForm } from 'effector-forms';
 import { Preset } from '@/shared/api';
 
-export interface PresetFormParams extends Omit<Preset, 'id' | 'userId'> {}
+export interface PresetFormParams
+	extends Omit<Preset, 'id' | 'userId' | 'isStandard'> {}
 
 export const createFormModel = (domain?: Domain) => {
 	return createForm<PresetFormParams>({
@@ -28,13 +29,13 @@ export const createFormModel = (domain?: Domain) => {
 			enableCustomGamma: {
 				init: false,
 			},
-			redChanel: {
+			red: {
 				init: 255,
 			},
-			greenChanel: {
+			green: {
 				init: 255,
 			},
-			blueChanel: {
+			blue: {
 				init: 255,
 			},
 		},

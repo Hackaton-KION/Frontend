@@ -5,13 +5,13 @@ import { CommonProps, VoidFunction } from '@/shared/types';
 import { PresetForm } from '../../shared/ui';
 import { form } from '../model';
 
-export interface CreatePresetProps extends CommonProps {
+export interface UpdatePresetProps extends CommonProps {
 	readonly open: boolean;
 	readonly onClose: VoidFunction;
 	readonly anchorEl: HTMLElement | null;
 }
 
-export const CreatePreset: React.FC<CreatePresetProps> = (props) => {
+export const UpdatePreset: React.FC<UpdatePresetProps> = (props) => {
 	const { className, open, onClose, anchorEl, } = props;
 
 	return (
