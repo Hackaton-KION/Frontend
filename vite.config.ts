@@ -9,6 +9,13 @@ export default defineConfig({
 	server: {
 		port: 3000,
 		cors: true,
+		hmr: true,
+		proxy: {
+			'/static': {
+				target: 'http://localhost:5000',
+				changeOrigin: true,
+			},
+		},
 	},
 	resolve: {
 		alias: {
@@ -18,6 +25,7 @@ export default defineConfig({
 	css: {
 		devSourcemap: true,
 	},
+	assetsInclude: ['*.woff2', '*.png', '*.jpg'],
 	plugins: [
 		react(),
 		babel({
@@ -27,6 +35,6 @@ export default defineConfig({
 			browserslistConfigFile: true,
 			extensions: ['.ts', '.tsx'],
 		}),
-		splitVendorChunkPlugin()
+		splitVendorChunkPlugin(),
 	],
 });
