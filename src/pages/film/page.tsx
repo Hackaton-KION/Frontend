@@ -12,15 +12,11 @@ const Film: React.FC = () => {
 
 	return (
 		<MainLayout className={styles.layout}>
-			{/* {film.data ? ( */}
-			<FilmPlayer
-				className={styles.player}
-				manifestURL='http://dash.edgesuite.net/envivio/dashpr/clear/Manifest.mpd'
-				// {...film.data}
-			/>
-			{/* ) : (
-				<CircularProgress size={80} color='secondary'/>
-			)} */}
+			{film.data ? (
+				<FilmPlayer className={styles.player} {...film.data} />
+			) : (
+				<CircularProgress size={80} color='secondary' />
+			)}
 		</MainLayout>
 	);
 };
