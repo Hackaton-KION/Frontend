@@ -4,7 +4,6 @@ import { VoidFunction } from '@/shared/types';
 export interface VideoPlayerStateContextParams {
 	readonly isPlaying: boolean;
 	readonly videoRef: RefObject<HTMLVideoElement>;
-	readonly progress: number;
 	readonly volume: number;
 }
 export interface VideoPlayerHandlersContextParams {
@@ -13,6 +12,7 @@ export interface VideoPlayerHandlersContextParams {
 	readonly onForward: VoidFunction;
 	readonly onBack: VoidFunction;
 	readonly onChangeVolume: (volume: number) => void;
+	readonly onChangeTime: (time: number) => void;
 }
 
 export const VideoPlayerStateContext =
