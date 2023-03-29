@@ -1,22 +1,22 @@
-import * as React from 'react';
-import cn from 'classnames';
-import { CommonProps } from '@/shared/types';
-import { Form, useForm } from 'effector-forms';
-import { PresetFormParams } from '../../lib';
 import { Button, Switch } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import cn from 'classnames';
+import { Form, useForm } from 'effector-forms';
+import * as React from 'react';
+import { useSubmit } from '@/shared/lib';
+import { CommonProps } from '@/shared/types';
+import { Field, Slider, Checkbox } from '@/shared/ui';
+import { PresetFormParams } from '../../lib';
 
 import styles from './preset-form.module.css';
-import { useSubmit } from '@/shared/lib';
-import { Field, Slider, Checkbox } from '@/shared/ui';
-import { styled } from '@mui/material/styles';
 
 export interface PresetFormProps extends CommonProps {
 	readonly $form: Form<PresetFormParams>;
 }
 
 export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
-	const { className, $form } = props;
-	const { fields, submit } = useForm($form);
+	const { className, $form, } = props;
+	const { fields, submit, } = useForm($form);
 	const {
 		brightness,
 		contrast,
@@ -44,7 +44,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 					name={name.name}
 					variant='outlined'
 					label='Название'
-					InputLabelProps={{ style: { color: 'white' } }}
+					InputLabelProps={{ style: { color: 'white', }, }}
 					size='small'
 				/>
 
@@ -62,7 +62,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						max={200}
 						step={1}
 						color='secondary'
-						style={{ width: '8rem' }}
+						style={{ width: '8rem', }}
 					/>
 					<Slider
 						label='Контрастность'
@@ -73,7 +73,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						max={300}
 						step={1}
 						color='secondary'
-						style={{ width: '8rem' }}
+						style={{ width: '8rem', }}
 					/>
 					<Slider
 						label='Насыщенность'
@@ -84,7 +84,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						max={50}
 						step={1}
 						color='secondary'
-						style={{ width: '8rem' }}
+						style={{ width: '8rem', }}
 					/>
 					<Slider
 						label='Резкость'
@@ -96,7 +96,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						step={1}
 						color='secondary'
 						disabled
-						style={{ width: '8rem' }}
+						style={{ width: '8rem', }}
 					/>
 				</div>
 				<div className={styles.switchers}>
@@ -129,6 +129,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 					step={1}
 					color='secondary'
 					disabled={!enableCustomGamma.value}
+					style={{ width: '8rem', }}
 				/>
 				<Slider
 					label='Зеленый'
@@ -140,6 +141,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 					step={1}
 					color='secondary'
 					disabled={!enableCustomGamma.value}
+					style={{ width: '8rem', }}
 				/>
 				<Slider
 					label='Синий'
@@ -151,13 +153,14 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 					step={1}
 					color='secondary'
 					disabled={!enableCustomGamma.value}
+					style={{ width: '8rem', }}
 				/>
 			</div>
 		</form>
 	);
 });
 
-const Android12Switch = styled(Switch)(({ theme }) => ({
+const Android12Switch = styled(Switch)(({ theme, }) => ({
 	padding: 8,
 	'& .MuiSwitch-track': {
 		borderRadius: 22 / 2,

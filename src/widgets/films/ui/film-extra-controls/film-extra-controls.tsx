@@ -1,13 +1,17 @@
-import { UserPresets } from '@/entities/presets';
-import { CreatePreset, RemovePreset, UpdatePreset } from '@/features/presets';
-import { useToggle } from '@/shared/lib';
-import { CommonProps } from '@/shared/types';
-import { EyeIcon } from '@/shared/ui';
 import { IconButton } from '@mui/material';
 import cn from 'classnames';
 import { useUnit } from 'effector-react';
 import * as React from 'react';
-import { selectedPresetModel } from '../../model';
+import { CreatePreset, RemovePreset, UpdatePreset } from '@/features/presets';
+import { UserPresets } from '@/entities/presets';
+import { useToggle } from '@/shared/lib';
+import { CommonProps } from '@/shared/types';
+import { EyeIcon } from '@/shared/ui';
+import {
+	changingPresetModel,
+	fileExtraControls,
+	selectedPresetModel,
+} from '../../model';
 import styles from './film-extra-controls.module.css';
 
 export interface FilmExtraControlsProps extends CommonProps {}
@@ -15,33 +19,44 @@ export interface FilmExtraControlsProps extends CommonProps {}
 export const FilmExtraControls: React.FC<FilmExtraControlsProps> = (props) => {
 	const { className } = props;
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+	const [stage, setStage] = useUnit([
+		fileExtraControls.$stage,
+		fileExtraControls.setStage,
+	]);
 	const [presetsOpen, presetsControls] = useToggle();
-	const [createOpen, createControls] = useToggle();
-	const [updateOpen, updateControls] = useToggle();
-	const [removeOpen, removeControls] = useToggle();
-	const [selectedId, onSelect] = useUnit([
+	const [changingId, onChangingSelect, selectedId, onSelect] = useUnit([
+		changingPresetModel.$id,
+		changingPresetModel.selected,
 		selectedPresetModel.$id,
 		selectedPresetModel.selected,
 	]);
 
+	const onCreate = () => {
+		setStage('create');
+	};
+
+	const closeCreate = () => {
+		setStage('overview');
+	};
+
 	const onUpdate = (id: number) => {
-		updateControls.toggleOn();
-		selectedPresetModel.selected(id);
+		setStage('update');
+		onChangingSelect(id);
 	};
 
 	const closeUpdate = () => {
-		updateControls.toggleOff();
-		onSelect(null);
+		setStage('overview');
+		onChangingSelect(null);
 	};
 
 	const onRemove = (id: number) => {
-		removeControls.toggleOn();
-		onSelect(id);
+		setStage('delete');
+		onChangingSelect(id);
 	};
 
 	const closeRemove = () => {
-		updateControls.toggleOff();
-		onSelect(null);
+		setStage('overview');
+		onChangingSelect(null);
 	};
 
 	return (
@@ -56,21 +71,27 @@ export const FilmExtraControls: React.FC<FilmExtraControlsProps> = (props) => {
 				open={presetsOpen}
 				anchorEl={anchorEl}
 				onClose={presetsControls.toggleOff}
-				onCreate={createControls.toggleOn}
+				onCreate={onCreate}
+				onSelect={onSelect}
+				selectedId={selectedId}
 				onUpdate={onUpdate}
 				onDelete={onRemove}
 			/>
 			<CreatePreset
-				open={createOpen}
-				onClose={createControls.toggleOff}
+				open={stage === 'create'}
+				onClose={closeCreate}
 				anchorEl={anchorEl}
 			/>
 			<UpdatePreset
-				open={updateOpen}
+				open={stage === 'update'}
 				onClose={closeUpdate}
 				anchorEl={anchorEl}
 			/>
-			<RemovePreset id={selectedId!} open={removeOpen} onClose={closeRemove} />
+			<RemovePreset
+				id={changingId!}
+				open={stage === 'delete'}
+				onClose={closeRemove}
+			/>
 		</>
 	);
 };

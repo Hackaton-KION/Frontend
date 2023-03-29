@@ -89,7 +89,7 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 	React.useEffect(() => {
 		const player = MediaPlayer().create();
 
-		// player.initialize(videoRef.current!, url, false);
+		player.initialize(videoRef.current!, url, false);
 	}, [url]);
 
 	// eslint-disable-next-line react/jsx-no-constructed-context-values

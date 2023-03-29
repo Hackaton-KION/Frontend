@@ -1,6 +1,6 @@
-import { presetsApi } from '@/shared/api';
 import { createMutation } from '@farfetched/core';
 import { createDomain } from 'effector';
+import { presetsApi } from '@/shared/api';
 
 const removePreset = createDomain();
 

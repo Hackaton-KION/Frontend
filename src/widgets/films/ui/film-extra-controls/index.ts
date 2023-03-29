@@ -1,4 +1,4 @@
 export {
 	FilmExtraControls,
-	type FilmExtraControlsProps,
+	type FilmExtraControlsProps
 } from './film-extra-controls';

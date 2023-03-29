@@ -1,11 +1,11 @@
-import { userPresetsModel } from '@/entities/presets';
+import { update } from '@farfetched/core';
+import { sample } from 'effector';
 import {
 	createPresetModel,
 	removePresetModel,
-	updatePresetModel,
+	updatePresetModel
 } from '@/features/presets';
-import { update } from '@farfetched/core';
-import { sample } from 'effector';
+import { userPresetsModel } from '@/entities/presets';
 import { currentRoute, loadedWithRouteState } from './page';
 
 sample({
@@ -16,7 +16,7 @@ sample({
 update(userPresetsModel.query, {
 	on: createPresetModel.mutation,
 	by: {
-		success: ({ mutation, query }) => {
+		success: ({ mutation, query, }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -41,7 +41,7 @@ update(userPresetsModel.query, {
 update(userPresetsModel.query, {
 	on: updatePresetModel.mutation,
 	by: {
-		success: ({ mutation, query }) => {
+		success: ({ mutation, query, }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -59,7 +59,7 @@ update(userPresetsModel.query, {
 			return {
 				result: query.result.map((preset) =>
 					preset.id === mutation.params.id
-						? { ...preset, ...mutation.params }
+						? { ...preset, ...mutation.params, }
 						: preset
 				),
 			};
@@ -70,7 +70,7 @@ update(userPresetsModel.query, {
 update(userPresetsModel.query, {
 	on: removePresetModel.mutation,
 	by: {
-		success: ({ mutation, query }) => {
+		success: ({ mutation, query, }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -84,7 +84,7 @@ update(userPresetsModel.query, {
 					refetch: true,
 				};
 			}
-
+      debugger
 			return {
 				result: query.result.filter(
 					(preset) => preset.id !== mutation.params.id

@@ -2,7 +2,8 @@ import { Domain } from 'effector';
 import { createForm } from 'effector-forms';
 import { Preset } from '@/shared/api';
 
-export interface PresetFormParams extends Omit<Preset, 'id' | 'userId'> {}
+export interface PresetFormParams
+	extends Omit<Preset, 'id' | 'userId' | 'isStandard'> {}
 
 export const createFormModel = (domain?: Domain) => {
 	return createForm<PresetFormParams>({

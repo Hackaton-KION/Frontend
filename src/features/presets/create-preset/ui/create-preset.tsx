@@ -3,9 +3,9 @@ import cn from 'classnames';
 import * as React from 'react';
 
 import { CommonProps, VoidFunction } from '@/shared/types';
+import { PresetForm } from '../../shared/ui';
 import { form } from '../model';
 import styles from './create-preset.module.css';
-import { PresetForm } from '../../shared/ui';
 
 export interface CreatePresetProps extends CommonProps {
 	readonly open: boolean;
@@ -14,7 +14,7 @@ export interface CreatePresetProps extends CommonProps {
 }
 
 export const CreatePreset: React.FC<CreatePresetProps> = (props) => {
-	const { className, open, onClose, anchorEl } = props;
+	const { className, open, onClose, anchorEl, } = props;
 
 	return (
 		<Popover open={open} anchorEl={anchorEl} onClose={onClose}>

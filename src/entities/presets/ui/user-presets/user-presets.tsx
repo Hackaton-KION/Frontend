@@ -14,21 +14,23 @@ import {
 	ListItemText,
 	ListItemButton,
 	ListItem,
-	ListSubheader,
+	ListSubheader
 } from '@mui/material';
 import cn from 'classnames';
+import { useUnit } from 'effector-react';
+import * as React from 'react';
+import { userPresetsModel } from '@/entities/presets';
 import { useToggle } from '@/shared/lib';
 import { CommonProps, VoidFunction } from '@/shared/types';
-import * as React from 'react';
 
 import styles from './user-presets.module.css';
-import { useUnit } from 'effector-react';
-import { userPresetsModel } from '@/entities/presets';
 
 type Handler = (id: number) => void;
 
 export interface UserPresetsProps extends CommonProps {
 	readonly open: boolean;
+	readonly onSelect: Handler;
+	readonly selectedId: number;
 	readonly anchorEl: HTMLElement | null;
 	readonly onClose: VoidFunction;
 	readonly onCreate: VoidFunction;
@@ -37,8 +39,17 @@ export interface UserPresetsProps extends CommonProps {
 }
 
 export const UserPresets: React.FC<UserPresetsProps> = (props) => {
-	const { className, open, anchorEl, onClose, onUpdate, onCreate, onDelete } =
-		props;
+	const {
+		className,
+		open,
+		anchorEl,
+		onClose,
+		onUpdate,
+		onCreate,
+		onDelete,
+		selectedId,
+		onSelect,
+	} = props;
 	const presets = useUnit(userPresetsModel.query);
 	const [edit, editControls] = useToggle(false);
 
@@ -47,8 +58,8 @@ export const UserPresets: React.FC<UserPresetsProps> = (props) => {
 	return (
 		<Popover
 			open={open}
-			anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-			transformOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+			anchorOrigin={{ vertical: 'top', horizontal: 'right', }}
+			transformOrigin={{ vertical: 'bottom', horizontal: 'right', }}
 			anchorEl={anchorEl}
 			onClose={onClose}>
 			<div className={styles.modal}>
@@ -72,9 +83,11 @@ export const UserPresets: React.FC<UserPresetsProps> = (props) => {
 					{presets.data.map((preset) => {
 						return !edit ? (
 							<ListItem disablePadding>
-								<ListItemButton selected>
+								<ListItemButton
+									onClick={createHandler(preset.id, onSelect)}
+									selected={preset.id === selectedId}>
 									<ListItemAvatar>
-										<Avatar style={{ backgroundColor: '#db8cff' }}>
+										<Avatar style={{ backgroundColor: '#db8cff', }}>
 											<MovieFilterIcon color='secondary' />
 										</Avatar>
 									</ListItemAvatar>
@@ -84,7 +97,7 @@ export const UserPresets: React.FC<UserPresetsProps> = (props) => {
 						) : (
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar style={{ backgroundColor: '#db8cff' }}>
+									<Avatar style={{ backgroundColor: '#db8cff', }}>
 										<MovieFilterIcon color='secondary' />
 									</Avatar>
 								</ListItemAvatar>
@@ -95,16 +108,20 @@ export const UserPresets: React.FC<UserPresetsProps> = (props) => {
 										</Typography>
 									}
 								/>
-								<IconButton
-									className={cn(styles.button, className)}
-									onClick={createHandler(preset.id, onUpdate)}>
-									<CreateIcon color='secondary' />
-								</IconButton>
-								<IconButton
-									className={cn(styles.button, className)}
-									onClick={createHandler(preset.id, onDelete)}>
-									<RemoveCircleIcon color='secondary' />
-								</IconButton>
+								{preset.isStandard ? null : (
+									<>
+										<IconButton
+											className={cn(styles.button, className)}
+											onClick={createHandler(preset.id, onUpdate)}>
+											<CreateIcon color='secondary' />
+										</IconButton>
+										<IconButton
+											className={cn(styles.button, className)}
+											onClick={createHandler(preset.id, onDelete)}>
+											<RemoveCircleIcon color='secondary' />
+										</IconButton>
+									</>
+								)}
 							</ListItem>
 						);
 					})}
@@ -112,12 +129,12 @@ export const UserPresets: React.FC<UserPresetsProps> = (props) => {
 						<IconButton
 							className={cn(styles.button, className)}
 							onClick={onCreate}
-							style={{ backgroundColor: '#9c27b0' }}>
+							style={{ backgroundColor: '#9c27b0', }}>
 							<AddIcon />
 						</IconButton>
 						<IconButton
 							className={cn(styles.button, className)}
-							style={{ backgroundColor: '#9c27b0' }}
+							style={{ backgroundColor: '#9c27b0', }}
 							onClick={editControls.toggle}>
 							{edit ? <ArrowBackIcon /> : <FormatListBulletedIcon />}
 						</IconButton>

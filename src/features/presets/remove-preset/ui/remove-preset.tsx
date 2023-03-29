@@ -1,13 +1,13 @@
-import { CommonProps, VoidFunction } from '@/shared/types';
 import {
 	Button,
 	Dialog,
 	DialogActions,
 	DialogContentText,
-	DialogTitle,
+	DialogTitle
 } from '@mui/material';
-import * as React from 'react';
 import { useUnit } from 'effector-react';
+import * as React from 'react';
+import { CommonProps, VoidFunction } from '@/shared/types';
 import { removePresetModel } from '..';
 
 export interface RemovePresetProps extends CommonProps {
@@ -17,11 +17,12 @@ export interface RemovePresetProps extends CommonProps {
 }
 
 export const RemovePreset: React.FC<RemovePresetProps> = (props) => {
-	const { id, className, open, onClose } = props;
+	const { id, className, open, onClose, } = props;
 	const remove = useUnit(removePresetModel.mutation);
 
 	const onRemove = () => {
-		remove.start({ id });
+		remove.start({ id, });
+		onClose();
 	};
 
 	return (
