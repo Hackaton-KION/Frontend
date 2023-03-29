@@ -99,7 +99,7 @@ export const PresetForm: React.FC<PresetFormProps> = React.memo((props) => {
 						style={{ width: '8rem', }}
 					/>
 				</div>
-				<div className={styles.switchers}>
+				<div className={styles.switches}>
 					<Checkbox
 						name={offEpilepticScene.name}
 						checked={offEpilepticScene.value}

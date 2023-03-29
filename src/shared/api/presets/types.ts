@@ -14,7 +14,8 @@ export interface Preset {
 	readonly isStandard: boolean;
 }
 
-export interface CreatePresetParams extends Omit<Preset, 'id' | 'userId'> {}
+export interface CreatePresetParams
+	extends Omit<Preset, 'id' | 'userId' | 'isStandard'> {}
 
 export interface UpdatePresetParams extends Partial<Preset> {
 	readonly id: number;

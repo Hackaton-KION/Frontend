@@ -6,7 +6,7 @@ import { CommonProps } from '@/shared/types';
 import { parseTime } from '../../lib';
 import {
 	VideoPlayerStateContext,
-	VideoPlayerHandlersContext
+	VideoPlayerHandlersContext,
 } from '../../model';
 
 import styles from './timeline.module.css';
@@ -15,11 +15,11 @@ import 'react-video-seek-slider/styles.css';
 export interface TimelineProps extends CommonProps {}
 
 export const Timeline: React.FC<TimelineProps> = (props) => {
-	const { className, } = props;
-	const { videoRef, } = React.useContext(VideoPlayerStateContext);
-	const { onChangeTime, } = React.useContext(VideoPlayerHandlersContext);
+	const { className } = props;
+	const { videoRef } = React.useContext(VideoPlayerStateContext);
+	const { onChangeTime } = React.useContext(VideoPlayerHandlersContext);
 
-	const { duration, currentTime, } = videoRef.current! || {
+	const { duration, currentTime } = videoRef.current! || {
 		duration: 0,
 		currentTime: 0,
 	};
@@ -27,12 +27,7 @@ export const Timeline: React.FC<TimelineProps> = (props) => {
 	const durationParsed = parseTime(duration);
 
 	return (
-		<div
-			className={cn(
-				styles.container,
-				className,
-				cn(styles['inner-seek'], styles.connect)
-			)}>
+		<div className={cn(className, styles.connect)}>
 			<VideoSeekSlider
 				max={duration * 1000}
 				currentTime={currentTime * 1000}

@@ -5,7 +5,7 @@ let token: string | null = null;
 export const instance = ky.create({
 	mode: 'cors',
 	credentials: 'include',
-	prefixUrl: import.meta.env.VITE_API_URL,
+	prefixUrl: import.meta.env.VITE_API_URL || '/api',
 	hooks: {
 		beforeRequest: [
 			(request) => {

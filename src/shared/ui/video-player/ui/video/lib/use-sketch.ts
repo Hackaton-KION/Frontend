@@ -32,7 +32,7 @@ export const useSketch = (params: UseSketchParams) => {
 			}
 
 			videoRef.current = p5.createCapture('video');
-			const { width, height, } = canvasRef.current.size();
+			const { width, height, } = canvasRef.current.size() as any;
 			videoRef.current.size(width, height);
 
 			switch (typeof ref) {
