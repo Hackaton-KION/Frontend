@@ -3,13 +3,13 @@ import * as React from 'react';
 import { Film } from '@/shared/api';
 import { CommonProps } from '@/shared/types';
 import { VideoPlayer } from '@/shared/ui';
-import { selectedPresetModel } from '../../model';
+import { activePresetModel } from '../../model';
 import { FilmExtraControls } from '../film-extra-controls';
 
 export interface FilmPlayerProps extends CommonProps, Film {}
 
 export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
-	const { className, title, manifestURL, } = props;
+	const { className, title, manifest, } = props;
 
 	const {
 		brightness,
@@ -19,7 +19,7 @@ export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
 		green,
 		blue,
 		enableCustomGamma,
-	} = useUnit(selectedPresetModel.$selectedPreset);
+	} = useUnit(activePresetModel.$activePreset);
 
 	const videoStyles: React.CSSProperties = {
 		filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation})`,
@@ -28,7 +28,7 @@ export const FilmPlayer: React.FC<FilmPlayerProps> = (props) => {
 	return (
 		<VideoPlayer
 			className={className}
-			url={manifestURL}
+			url={manifest}
 			title={title}
 			videoStyles={videoStyles}
 			red={red}

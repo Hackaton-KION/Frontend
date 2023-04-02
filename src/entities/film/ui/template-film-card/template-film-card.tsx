@@ -14,7 +14,7 @@ import styles from './template-film-card.module.css';
 export interface TemplateFilmCardProps extends CommonProps, Film {}
 
 export const TemplateFilmCard: React.FC<TemplateFilmCardProps> = (props) => {
-	const { id, title, urlPreview, className, } = props;
+	const { id, title, preview: urlPreview, className, } = props;
 	return (
 		<div className={cn(styles.card, className)}>
 			<Link className={styles.link} to={routes.film} params={{ id, }}>

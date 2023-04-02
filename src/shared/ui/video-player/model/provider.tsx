@@ -12,7 +12,7 @@ export interface VideoPlayerProviderProps extends React.PropsWithChildren {
 export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 	props
 ) => {
-	const { url, videoRef, children, } = props;
+	const { url, videoRef, children } = props;
 	const [isPlaying, isPlayingControls] = useToggle(); // Состояние воспроизведения
 	const [volume, setVolume] = React.useState(1);
 	const [time, setTime] = React.useState(0);
@@ -28,16 +28,16 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		if (!videoRef.current) {
 			return;
 		}
-		isPlayingControls.toggleOn();
 		videoRef.current.play();
+		isPlayingControls.toggleOn();
 	}, []);
 	const onStop = React.useCallback(() => {
 		if (!videoRef.current) {
 			return;
 		}
 
-		isPlayingControls.toggleOff();
 		videoRef.current.pause();
+		isPlayingControls.toggleOff();
 	}, []);
 	const onForward = React.useCallback(() => {
 		if (!videoRef.current) {
@@ -74,20 +74,6 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		setTime(time);
 	}, []);
 
-	const handleKeyDown = (e: KeyboardEvent) => {
-		if (e.key === 'ArrowRight') {
-			onForward();
-		} else if (e.key === 'ArrowLeft') {
-			onBack();
-		} else if (e.key === ' ') {
-			if (videoRef.current?.paused) {
-				onStop();
-			} else {
-				onPlay();
-			}
-		}
-	};
-
 	React.useEffect(() => {
 		const id = setInterval(() => {
 			if (!videoRef.current) {
@@ -114,9 +100,29 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 	}, [url]);
 
 	React.useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown);
+		const handleKeyDown = (e: KeyboardEvent) => {
+			switch (e.key) {
+				case 'ArrowRight':
+					onForward();
+					break;
+				case 'ArrowLeft':
+					onBack();
+					break;
+				case ' ':
+					if (!videoRef.current?.paused) {
+						onStop();
+					} else {
+						onPlay();
+					}
+					break;
+				default:
+					break;
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
 		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
+			window.removeEventListener('keydown', handleKeyDown);
 		};
 	}, []);
 
@@ -128,7 +134,7 @@ export const VideoPlayerProvider: React.FC<VideoPlayerProviderProps> = (
 		volume,
 	};
 	const handlers = React.useMemo(
-		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume, onChangeTime, }),
+		() => ({ onBack, onForward, onPlay, onStop, onChangeVolume, onChangeTime }),
 		[]
 	);
 	return (

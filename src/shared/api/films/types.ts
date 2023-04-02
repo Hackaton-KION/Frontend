@@ -2,11 +2,10 @@ export interface Film {
 	readonly id: number;
 	readonly title: string;
 	readonly description: string;
-	readonly dateReleaseVideo: string;
-	readonly urlPreview: string;
-	readonly urlVideo: string;
-	readonly urlPreprocessedVideo: string;
-	readonly manifestURL: string;
+	readonly releaseDate: string;
+	readonly preview: string;
+	readonly video: string;
+	readonly manifest: string;
 }
 
 export interface GetOneParams {

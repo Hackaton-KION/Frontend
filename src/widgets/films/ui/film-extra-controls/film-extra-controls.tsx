@@ -8,27 +8,27 @@ import { useToggle } from '@/shared/lib';
 import { CommonProps } from '@/shared/types';
 import { EyeIcon } from '@/shared/ui';
 import {
-	changingPresetModel,
-	fileExtraControls,
-	selectedPresetModel
+	updatingPresetModel,
+	controlsStageModel,
+	activePresetModel,
 } from '../../model';
 import styles from './film-extra-controls.module.css';
 
 export interface FilmExtraControlsProps extends CommonProps {}
 
 export const FilmExtraControls: React.FC<FilmExtraControlsProps> = (props) => {
-	const { className, } = props;
+	const { className } = props;
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 	const [stage, setStage] = useUnit([
-		fileExtraControls.$stage,
-		fileExtraControls.setStage
+		controlsStageModel.$stage,
+		controlsStageModel.setStage,
 	]);
 	const [presetsOpen, presetsControls] = useToggle();
-	const [changingId, onChangingSelect, selectedId, onSelect] = useUnit([
-		changingPresetModel.$id,
-		changingPresetModel.selected,
-		selectedPresetModel.$id,
-		selectedPresetModel.selected
+	const [changingId, onChangingSelect, activeId, onSelect] = useUnit([
+		updatingPresetModel.$id,
+		updatingPresetModel.selected,
+		activePresetModel.$id,
+		activePresetModel.selected,
 	]);
 
 	const onCreate = () => {
@@ -73,7 +73,7 @@ export const FilmExtraControls: React.FC<FilmExtraControlsProps> = (props) => {
 				onClose={presetsControls.toggleOff}
 				onCreate={onCreate}
 				onSelect={onSelect}
-				selectedId={selectedId}
+				selectedId={activeId}
 				onUpdate={onUpdate}
 				onDelete={onRemove}
 			/>

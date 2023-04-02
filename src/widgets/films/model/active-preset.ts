@@ -1,10 +1,11 @@
 import { createDomain, sample } from 'effector';
 import { userPresetsModel } from '@/entities/presets';
 import { Preset } from '@/shared/api';
+import { snapshot } from 'patronum';
 
-const selectedPreset = createDomain();
+const activePreset = createDomain();
 
-const DEFAULT_PRESET: Preset = {
+export const DEFAULT_PRESET: Preset = {
 	blue: 255,
 	brightness: 100,
 	contrast: 100,
@@ -20,14 +21,18 @@ const DEFAULT_PRESET: Preset = {
 	isStandard: true,
 };
 
-export const $id = selectedPreset.store<number>(1);
-export const $selectedPreset = selectedPreset.store(DEFAULT_PRESET);
+export const $id = activePreset.store<number>(1);
+export const $activePreset = activePreset.store(DEFAULT_PRESET);
 
-const $snapshot = selectedPreset.store<null | Preset>(null);
+export const copy = activePreset.event();
 
-export const selected = selectedPreset.event<number | null>();
-export const copy = selectedPreset.event();
-export const restore = selectedPreset.event();
+export const selected = activePreset.event<number | null>();
+export const restore = activePreset.event();
+
+export const $snapshot = snapshot({
+	source: $activePreset,
+	clock: copy,
+});
 
 sample({
 	clock: selected,
@@ -40,25 +45,18 @@ sample({
 		presets: userPresetsModel.query.$data,
 		id: $id,
 	},
-	fn: ({ presets, id, }) => {
+	fn: ({ presets, id }) => {
 		return (
 			presets.find((preset) => preset.id === id) ??
 			presets.at(0) ??
 			DEFAULT_PRESET
 		);
 	},
-	target: $selectedPreset,
-});
-
-sample({
-	clock: copy,
-	source: $selectedPreset,
-	target: $snapshot,
+	target: $activePreset,
 });
 
 sample({
 	clock: restore,
 	source: $snapshot,
-	filter: Boolean,
-	target: $selectedPreset,
+	target: $activePreset,
 });

@@ -31,8 +31,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
 				name={login.name}
 				InputProps={{ disableUnderline: true, }}
 				variant='outlined'
-				placeholder='Телефон'
-				type='tel'
+				placeholder='Логин'
 			/>
 			<Field
 				className={styles.field}
