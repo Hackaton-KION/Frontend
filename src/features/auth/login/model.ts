@@ -36,7 +36,7 @@ sample({
 
 sample({
 	clock: mutation.finished.success,
-	fn: ({ result, }) => ({ id: result.id, login: result.login, }),
+	fn: ({ result }) => result.user,
 	target: authUserModel.$user,
 });
 

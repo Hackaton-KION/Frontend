@@ -1,4 +1,5 @@
 export * as promoFilmsModel from './promo';
-export * as selectedPresetModel from './selected-preset';
-export * as changingPresetModel from './changing-preset';
-export * as fileExtraControls from './film-extra-controls';
+export * as controlsStageModel from './controls-stage';
+export * as activePresetModel from './active-preset';
+export * as updatingPresetModel from './updating-preset';
+export * as creatingPresetModel from './creating-preset';

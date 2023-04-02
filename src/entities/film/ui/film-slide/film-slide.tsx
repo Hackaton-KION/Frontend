@@ -12,7 +12,7 @@ import styles from './film-slide.module.css';
 export interface FilmSliderProps extends CommonProps, Film {}
 
 export const FilmSlider: React.FC<FilmSliderProps> = (props) => {
-	const { description, id, title, urlPreview, className, } = props;
+	const { description, id, title, preview: urlPreview, className, } = props;
 
 	return (
 		<SwiperSlide className={cn(styles.slide, className)}>

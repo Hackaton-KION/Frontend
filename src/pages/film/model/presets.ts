@@ -3,7 +3,7 @@ import { sample } from 'effector';
 import {
 	createPresetModel,
 	removePresetModel,
-	updatePresetModel
+	updatePresetModel,
 } from '@/features/presets';
 import { userPresetsModel } from '@/entities/presets';
 import { currentRoute, loadedWithRouteState } from './page';
@@ -16,7 +16,7 @@ sample({
 update(userPresetsModel.query, {
 	on: createPresetModel.mutation,
 	by: {
-		success: ({ mutation, query, }) => {
+		success: ({ mutation, query }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -41,7 +41,7 @@ update(userPresetsModel.query, {
 update(userPresetsModel.query, {
 	on: updatePresetModel.mutation,
 	by: {
-		success: ({ mutation, query, }) => {
+		success: ({ mutation, query }) => {
 			if (!query) {
 				return {
 					result: [],
@@ -58,9 +58,7 @@ update(userPresetsModel.query, {
 
 			return {
 				result: query.result.map((preset) =>
-					preset.id === mutation.params.id
-						? { ...preset, ...mutation.params, }
-						: preset
+					preset.id === mutation.params.id ? mutation.result : preset
 				),
 			};
 		},
@@ -70,7 +68,7 @@ update(userPresetsModel.query, {
 update(userPresetsModel.query, {
 	on: removePresetModel.mutation,
 	by: {
-		success: ({ mutation, query, }) => {
+		success: ({ mutation, query }) => {
 			if (!query) {
 				return {
 					result: [],

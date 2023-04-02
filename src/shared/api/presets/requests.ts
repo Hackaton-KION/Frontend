@@ -16,7 +16,7 @@ export const create = (params: CreatePresetParams): Promise<Preset> => {
 	return instance.post(`${baseURL}/create`, { json: params, }).json();
 };
 
-export const update = (params: UpdatePresetParams): Promise<void> => {
+export const update = (params: UpdatePresetParams): Promise<Preset> => {
 	const { id, ...body } = params;
 	return instance.put(`${baseURL}/${id}/update`, { json: body, }).json();
 };

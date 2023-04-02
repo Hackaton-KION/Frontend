@@ -17,21 +17,21 @@ export const instance = ky.create({
 				}
 
 				request.headers.set('authorization', `Bearer ${token}`);
-			}
+			},
 		],
 		afterResponse: [
-			async (_request, options, response) => {
+			async (_request, _, response) => {
 				if (!response.ok) {
 					return;
 				}
 
 				const body = await response.json();
-				if (!('accessToken' in body)) {
+				if (!('tokens' in body)) {
 					return;
 				}
 
-				token = body.accessToken;
-			}
+				token = body.tokens.accessToken;
+			},
 		],
 	},
 });
